@@ -369,6 +369,9 @@
     }
     .anim-fade { animation: fadeUp .32s ease forwards; }
   </style>
+  <!-- Firebase SDK compat 버전 (전역 window.firebase 사용 가능) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
 <div id="app"></div>
@@ -542,34 +545,30 @@ const FIREBASE_CONFIG = {
 
 let db = null;
 
-// Firebase SDK 초기화 (CDN 로드)
+// Firebase 초기화 (SDK는 head에서 전역 로드됨)
 async function initFirebase() {
   if (db) return; // 이미 초기화됨
 
   try {
-    // Firebase 기본 스크립트 로드
-    await loadScript('https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js');
-    await loadScript('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js');
+    // Firebase SDK가 로드될 때까지 대기
+    let attempts = 0;
+    while (!window.firebase && attempts < 50) {
+      await new Promise(r => setTimeout(r, 100));
+      attempts++;
+    }
 
     // Firebase 초기화
     if (window.firebase && window.firebase.apps.length === 0) {
-      window.firebase.initializeApp(FIREBASE_CONFIG);
-      db = window.firebase.firestore();
-      console.log('Firebase initialized');
+      firebase.initializeApp(FIREBASE_CONFIG);
+      db = firebase.firestore();
+      console.log('Firebase initialized successfully');
+    } else if (window.firebase && window.firebase.apps.length > 0) {
+      db = firebase.firestore();
+      console.log('Firebase already initialized, using existing instance');
     }
   } catch (e) {
-    console.warn('Firebase initialization failed:', e);
+    console.error('Firebase initialization failed:', e);
   }
-}
-
-function loadScript(src) {
-  return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    script.src = src;
-    script.onload = resolve;
-    script.onerror = reject;
-    document.head.appendChild(script);
-  });
 }
 
 /* ── 유틸 ─────────────────────────────────────────────── */
@@ -615,10 +614,10 @@ async function saveToFirebase(typeKey) {
 /* ── 렌더 ─────────────────────────────────────────────── */
 const $app = document.getElementById('app');
 
-function render() {
+async function render() {
   if (step === -1)      renderIntro();
   else if (step < 7)    renderQ();
-  else                  renderResult();
+  else                  await renderResult();
 }
 
 function renderIntro() {
@@ -668,7 +667,7 @@ function renderAnalyzing() {
   `;
 }
 
-function renderResult() {
+async function renderResult() {
   const key = calcResult();
   const t   = TYPES[key];
 
@@ -704,7 +703,8 @@ function renderResult() {
     </div>
   `;
 
-  // 결과 저장
+  // Firebase 초기화 대기 후 결과 저장
+  await initFirebase();
   saveToFirebase(key).catch(e => console.error('Save failed:', e));
 }
 
