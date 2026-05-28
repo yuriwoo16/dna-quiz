@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#FE0955">
+  <title>나의 쇼핑 DNA</title>
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.css');
+
+    *, *::before, *::after {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --red:        #FE0955;
+      --red-soft:   #FF6694;
+      --red-bg:     #FFF0F4;
+      --dark:       #17192A;
+      --mid:        #6B7080;
+      --light:      #B0B5C5;
+      --border:     #E8EAF0;
+      --surface:    #F6F7FA;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Pretendard', -apple-system, 'Apple SD Gothic Neo', sans-serif;
+      background: #fff;
+      color: var(--dark);
+      overflow: hidden;
+    }
+
+    #app {
+      height: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── 진행 바 ────────────────────────── */
+    .prog-wrap {
+      flex-shrink: 0;
+      height: 3px;
+      background: var(--border);
+    }
+    .prog-fill {
+      height: 100%;
+      background: var(--red);
+      transition: width 0.4s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ── 공통 뷰 ────────────────────────── */
+    .view {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── 인트로 ─────────────────────────── */
+    .intro {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 32px;
+      padding-bottom: calc(40px + env(safe-area-inset-bottom));
+    }
+
+    .intro-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--red);
+      background: var(--red-bg);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+
+    .intro-title {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.35;
+      color: var(--dark);
+      margin-bottom: 14px;
+      word-break: keep-all;
+    }
+    .intro-title em {
+      color: var(--red);
+      font-style: normal;
+    }
+
+    .intro-desc {
+      font-size: 15px;
+      color: var(--mid);
+      line-height: 1.65;
+      margin-bottom: 48px;
+      word-break: keep-all;
+    }
+
+    .btn-start {
+      display: block;
+      width: 100%;
+      padding: 18px;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 100px;
+      font-family: inherit;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-bottom: 14px;
+      transition: opacity .15s;
+    }
+    .btn-start:active { opacity: .85; }
+
+    .intro-note {
+      font-size: 13px;
+      color: var(--light);
+    }
+
+    /* ── 문항 화면 ──────────────────────── */
+    .qview {
+      padding: 20px 24px 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 스텝 바 */
+    .step-bars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 32px;
+      flex-shrink: 0;
+    }
+    .step-bar {
+      flex: 1;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--border);
+      transition: background .3s;
+    }
+    .step-bar.done { background: var(--red); opacity: .45; }
+    .step-bar.curr { background: var(--red); }
+
+    /* 질문 */
+    .q-num {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: .5px;
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+
+    .q-text {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.45;
+      color: var(--dark);
+      word-break: keep-all;
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    /* 선택지 */
+    .opts {
+      flex-shrink: 0;
+      padding: 16px 0;
+      padding-bottom: calc(16px + env(safe-area-inset-bottom));
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .opt {
+      width: 100%;
+      padding: 15px 20px;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      background: #fff;
+      text-align: left;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--dark);
+      line-height: 1.5;
+      cursor: pointer;
+      word-break: keep-all;
+      transition: background .14s, border-color .14s, color .14s, transform .1s;
+    }
+    .opt:active:not(:disabled) { transform: scale(.985); }
+    .opt.selected {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+    }
+    .opt:disabled { cursor: default; }
+
+    /* ── 분석 중 ────────────────────────── */
+    .analyzing {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+    }
+    .analyzing-icon {
+      font-size: 52px;
+      animation: spin 1.2s linear infinite;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .analyzing h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .analyzing p {
+      font-size: 14px;
+      color: var(--mid);
+    }
+
+    /* ── 결과 화면 ──────────────────────── */
+    .result-view {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 32px 24px;
+      padding-bottom: calc(32px + env(safe-area-inset-bottom));
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .result-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 10px;
+    }
+    .result-emoji {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: var(--red-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin-bottom: 4px;
+    }
+    .result-pill {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--red);
+      background: var(--red-bg);
+      padding: 4px 14px;
+      border-radius: 100px;
+    }
+    .result-name {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+    .result-tagline {
+      font-size: 14px;
+      color: var(--mid);
+      word-break: keep-all;
+    }
+
+    .result-quote {
+      background: var(--surface);
+      border-radius: 16px;
+      border-left: 3px solid var(--red);
+      padding: 20px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+
+    .result-traits {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .result-trait {
+      display: flex;
+      gap: 10px;
+      font-size: 14px;
+      color: #4A4F62;
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    .trait-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+
+    .result-okn {
+      background: var(--red-bg);
+      border-radius: 14px;
+      padding: 18px;
+      font-size: 13px;
+      color: #5A2035;
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+    .result-okn strong { color: var(--red); font-weight: 700; }
+
+    .result-ctas {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .btn {
+      width: 100%;
+      padding: 17px;
+      border: none;
+      border-radius: 100px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+    .btn:active { opacity: .8; }
+    .btn-primary   { background: var(--red); color: #fff; }
+    .btn-secondary { background: var(--surface); color: var(--dark); }
+
+    .hashtags {
+      font-size: 13px;
+      color: var(--red-soft);
+      text-align: center;
+      line-height: 1.8;
+      word-break: break-word;
+    }
+
+    /* ── 전환 애니메이션 ─────────────────── */
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(18px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .anim-slide { animation: slideIn .22s ease forwards; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .anim-fade { animation: fadeUp .32s ease forwards; }
+  </style>
+  <!-- Firebase SDK compat 버전 (전역 window.firebase 사용 가능) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* ── 문항 데이터 (10문항, 이탈율 최소화 순서) ──────────────── */
+const QS = [
+  {
+    text: "택배가 도착했다.\n내 택배 상자는",
+    opts: [
+      "작아. 딱 필요한 것만 주문했거든",
+      "보통. 몇 개 같이 왔겠지",
+      "여러 가지. 이것저것 눈에 띄는 거 다 담았어"
+    ]
+  },
+  {
+    text: "인스타나 유튜브 보다가\n쇼핑한 적...",
+    opts: [
+      "자주 있어. 보다 보면 손이 가더라",
+      "가끔. 근데 사고 나서 후회할 때도 있어",
+      "거의 없어. 나는 필요할 때만 사"
+    ]
+  },
+  {
+    text: "세일/특가 알림이\n떴을 때",
+    opts: [
+      "바로 클릭해서 뭔지 봐",
+      "나중에 봐야지 하고 넘어감",
+      "대부분 무시해. 필요하면 내가 찾아봄"
+    ]
+  },
+  {
+    text: "쇼핑할 때\n나는...",
+    opts: [
+      "살 것 정해두고 딱 그것만 찾아",
+      "일단 둘러보다 마음에 드는 거 담아",
+      "들어가면 어느새 장바구니가 가득"
+    ]
+  },
+  {
+    text: "맘에 드는 상품인데\n리뷰가 0개라면?",
+    opts: [
+      "그냥 사. 내 눈을 믿어",
+      "좀 더 찾아보고 결정",
+      "리뷰 있는 걸로 바꿔"
+    ]
+  },
+  {
+    text: "갖고 싶은 상품이\n품절되었을 때",
+    opts: [
+      "재입고 알림 신청하고 기다려",
+      "어, 그러면 다른 거 뭐 있나 둘러봐",
+      "그냥 포기해. 인연이 아닌 거지"
+    ]
+  },
+  {
+    text: "쇼핑 결제 직전에",
+    opts: [
+      "한 번 더 고민하다 장바구니에 남겨둠",
+      "고민 없이 바로 결제",
+      "쿠폰/할인 더 없나 다시 뒤져봄"
+    ]
+  },
+  {
+    text: "원하는 상품을\n비교할 때",
+    opts: [
+      "가격 비교 사이트까지 다 뒤져봄",
+      "후기 몇 개 읽고 결정",
+      "그냥 눈에 드는 거 바로 담아"
+    ]
+  },
+  {
+    text: "공구에서\n제일 먼저 보는 건...",
+    opts: [
+      "얼마나 모였나 (참여 현황)",
+      "마감까지 얼마나 남았나",
+      "상품 상세 설명"
+    ]
+  },
+  {
+    text: "쇼핑하고 나서\n주변에 공유하는 편이야?",
+    opts: [
+      "자주! 좋은 거 발견하면 바로 알려줌",
+      "가끔. 진짜 좋을 때만",
+      "거의 안 해. 쇼핑은 나만의 즐거움"
+    ]
+  }
+];
+
+/* ── 판별 로직 ─────────────────────────────────────────── */
+// SCORE_MAP[질문인덱스][선택지인덱스] = 타입키
+// 각 타입 정확히 5회 등장 (10문항 × 3선택지 = 30, 6타입 × 5 = 30)
+const SCORE_MAP = [
+  ['A', 'E', 'F'],  // Q1: 택배 상자
+  ['D', 'B', 'A'],  // Q2: SNS 쇼핑
+  ['D', 'B', 'F'],  // Q3: 세일 알림
+  ['A', 'F', 'D'],  // Q4: 쇼핑 방식
+  ['B', 'C', 'E'],  // Q5: 리뷰 0개
+  ['A', 'F', 'B'],  // Q6: 품절
+  ['A', 'D', 'C'],  // Q7: 결제 직전
+  ['C', 'E', 'B'],  // Q8: 비교
+  ['E', 'D', 'C'],  // Q9: 공구 확인
+  ['E', 'F', 'C'],  // Q10: 공유
+];
+
+/* ── 유형 데이터 ───────────────────────────────────────── */
+const TYPES = {
+  A: {
+    emoji: "🎯",
+    name: "스나이퍼 쇼퍼",
+    tagline: "원하는 것만, 딱, 바로",
+    quote: "쇼핑에 시간 낭비 없어요.\n살 거 정했으면 그냥 사는 거죠.",
+    traits: [
+      "장바구니에 쓸데없는 게 없음",
+      "검색창에 원하는 상품명을 정확히 입력함",
+      "세일 없어도 필요하면 사고, 세일 있어도 필요 없으면 안 삼"
+    ],
+    okn: "정확한 취향을 아는 게 최고의 쇼핑 능력이에요.\n<strong>관심 카테고리 신규 공구</strong>, 먼저 알려드릴게요.",
+    tags: "#스나이퍼쇼퍼 #목적지향 #나의쇼핑DNA"
+  },
+  B: {
+    emoji: "🌈",
+    name: "무드 쇼퍼",
+    tagline: "기분이 결정해요",
+    quote: "오늘 기분 좋으니까 샀어요.\n그게 이유예요.",
+    traits: [
+      "예쁘면 사고, 마음이 동하면 사",
+      "브랜드 감성이 맞으면 가격은 두 번째",
+      "'살까 말까'는 언제나 기분이 결정해줌"
+    ],
+    okn: "감성 맞는 브랜드 발견하는 게 쇼핑의 묘미죠.\n<strong>라이프스타일 공구</strong>, 분위기 좋은 것들 모아드릴게요.",
+    tags: "#무드쇼퍼 #기분이결정 #나의쇼핑DNA"
+  },
+  C: {
+    emoji: "💎",
+    name: "가성비 탐정",
+    tagline: "최저가 아닌 거 사면 찝찝해요",
+    quote: "어딘가 더 싼 데 있을 것 같아서요.",
+    traits: [
+      "가격 비교는 기본, 성분/스펙 비교는 덤",
+      "숨겨진 할인 쿠폰 찾는 거 은근 재밌음",
+      "좋은 딜 발견하면 혼자 간직함"
+    ],
+    okn: "이미 최저가인데 더 알뜰하게 드릴 수 있어요.\n<strong>공동구매 원가 절감</strong>, 혼자 사는 것보다 확실히 싸요.",
+    tags: "#가성비탐정 #최저가사냥꾼 #나의쇼핑DNA"
+  },
+  D: {
+    emoji: "⚡",
+    name: "번개 쇼퍼",
+    tagline: "보면 사고, 사면 잊어요",
+    quote: "그 순간의 설렘이 진짜예요.\n나중에 오면 이미 늦어요.",
+    traits: [
+      "본 순간 결정됨, 고민 시간은 3초",
+      "택배 오면 '이게 뭐였지?' 싶을 때 있음",
+      "SNS 보다가 어느새 결제 완료돼 있음"
+    ],
+    okn: "그 순간 못 사면 놓쳐요. 당신을 위한 알림이 있어요.\n<strong>한정 타임딜 공구</strong>, 알림 먼저 받아보세요.",
+    tags: "#번개쇼퍼 #즉흥결제 #나의쇼핑DNA"
+  },
+  E: {
+    emoji: "👥",
+    name: "리뷰 신뢰자",
+    tagline: "후기 없으면 불안해요",
+    quote: "다들 좋다고 하는 데는\n이유가 있는 거잖아요.",
+    traits: [
+      "리뷰 100개 이상인 상품에 안심감이 옴",
+      "주변 추천 상품은 꼭 기억해뒀다가 삼",
+      "좋은 거 발견하면 참지 못하고 바로 공유함"
+    ],
+    okn: "검증된 게 좋은 거 맞아요.\n<strong>참여율 높은 인기 공구</strong>, 믿고 참여해도 돼요.",
+    tags: "#리뷰신뢰자 #소셜쇼퍼 #나의쇼핑DNA"
+  },
+  F: {
+    emoji: "🔍",
+    name: "발굴 쇼퍼",
+    tagline: "남들 모르는 거 먼저 찾아요",
+    quote: "이걸 어디서 봤냐고요?\n저만 알고 있었어요.",
+    traits: [
+      "새 브랜드, 처음 보는 아이템이 더 설렘",
+      "쇼핑 자체가 취미, 발굴하는 과정이 즐거움",
+      "품절되면 비슷한 다른 거 찾는 게 또 재밌음"
+    ],
+    okn: "신규 브랜드를 가장 먼저 만나는 사람이 있어야죠.\n<strong>얼리버드 공구</strong>, 당신을 위해 준비했어요.",
+    tags: "#발굴쇼퍼 #탐험쇼퍼 #나의쇼핑DNA"
+  }
+};
+
+/* ── 앱 상태 ──────────────────────────────────────────── */
+const TOTAL_Q = 10;
+let step    = -1;
+let quizStartTime = null;
+let answers = [];
+
+/* ── Firebase 초기화 ──────────────────────────────────── */
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyCtGNMXqjk45k0CkQI9Q4PDMkHt5tB_iyI",
+  authDomain: "gpdna-cbf7b.firebaseapp.com",
+  projectId: "gpdna-cbf7b",
+  storageBucket: "gpdna-cbf7b.firebasestorage.app",
+  messagingSenderId: "351903573550",
+  appId: "1:351903573550:web:d4d6970f965c00083021bf"
+};
+
+let db = null;
+
+async function initFirebase() {
+  if (db) return;
+  try {
+    let attempts = 0;
+    while (!window.firebase && attempts < 50) {
+      await new Promise(r => setTimeout(r, 100));
+      attempts++;
+    }
+    if (window.firebase && window.firebase.apps.length === 0) {
+      firebase.initializeApp(FIREBASE_CONFIG);
+      db = firebase.firestore();
+      console.log('Firebase initialized');
+    } else if (window.firebase && window.firebase.apps.length > 0) {
+      db = firebase.firestore();
+      console.log('Firebase already initialized');
+    }
+  } catch (e) {
+    console.error('Firebase init failed:', e);
+  }
+}
+
+/* ── 유틸 ─────────────────────────────────────────────── */
+function nl2br(s) {
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\n/g, '<br>');
+}
+
+function calcResult() {
+  const sc = { A:0, B:0, C:0, D:0, E:0, F:0 };
+  answers.forEach((a, i) => {
+    sc[SCORE_MAP[i][a]]++;
+  });
+  return Object.entries(sc).sort((a,b) => b[1]-a[1])[0][0];
+}
+
+/* ── Firebase 데이터 저장 ─────────────────────────────── */
+async function saveToFirebase(typeKey) {
+  if (!db) {
+    console.warn('Firebase not initialized');
+    return;
+  }
+  try {
+    const ua = navigator.userAgent;
+    const isMobile = /iPhone|Android.*Mobile|BlackBerry|IEMobile/.test(ua);
+    const isTablet = /iPad|Android(?!.*Mobile)/.test(ua);
+    const deviceType = isMobile ? 'mobile' : isTablet ? 'tablet' : 'desktop';
+
+    const referrer = document.referrer || 'direct';
+    const isKakao  = /KAKAO/i.test(ua);
+    const source   = isKakao ? 'kakao'
+                   : referrer.includes('instagram') ? 'instagram'
+                   : referrer === 'direct' ? 'direct' : 'other';
+
+    const data = {
+      type: typeKey,
+      answers: answers,
+      timestamp: new Date().toISOString(),
+      durationSec: quizStartTime ? Math.round((Date.now() - quizStartTime) / 1000) : null,
+      deviceType: deviceType,
+      screenWidth: window.innerWidth,
+      source: source,
+      referrer: referrer.substring(0, 100),
+      lang: navigator.language || 'unknown',
+      userAgent: ua.substring(0, 150)
+    };
+
+    const result = await db.collection('shopping_results').add(data);
+    console.log('Saved to Firebase:', result.id);
+    return true;
+  } catch (e) {
+    console.error('Firebase save error:', e);
+    return false;
+  }
+}
+
+/* ── 렌더 ─────────────────────────────────────────────── */
+const $app = document.getElementById('app');
+
+async function render() {
+  if (step === -1)            renderIntro();
+  else if (step < TOTAL_Q)   renderQ();
+  else                        await renderResult();
+}
+
+function renderIntro() {
+  $app.innerHTML = `
+    <div class="view intro">
+      <div class="intro-badge">🛍️ 나의 쇼핑 DNA</div>
+      <h1 class="intro-title">쇼핑할 때<br>나는 어떤<br><em>사람</em>일까?</h1>
+      <p class="intro-desc">10개 질문으로 알아보는<br>나만의 쇼핑 심리 유형</p>
+      <button class="btn-start" onclick="goStart()">지금 바로 →</button>
+      <p class="intro-note">10개 질문 · 2분이면 완료</p>
+    </div>
+  `;
+}
+
+function renderQ() {
+  const q   = QS[step];
+  const pct = (step / TOTAL_Q) * 100;
+
+  const bars = Array.from({ length: TOTAL_Q }, (_, i) => {
+    const cls = i < step ? 'done' : i === step ? 'curr' : '';
+    return `<div class="step-bar ${cls}"></div>`;
+  }).join('');
+
+  const opts = q.opts.map((o, i) =>
+    `<button class="opt" onclick="pick(${i})">${nl2br(o)}</button>`
+  ).join('');
+
+  $app.innerHTML = `
+    <div class="prog-wrap"><div class="prog-fill" style="width:${pct}%"></div></div>
+    <div class="view qview anim-slide">
+      <div class="step-bars">${bars}</div>
+      <div class="q-num">Q${step + 1} / ${TOTAL_Q}</div>
+      <div class="q-text">${nl2br(q.text)}</div>
+      <div class="opts">${opts}</div>
+    </div>
+  `;
+}
+
+function renderAnalyzing() {
+  $app.innerHTML = `
+    <div class="prog-wrap"><div class="prog-fill" style="width:100%"></div></div>
+    <div class="view analyzing">
+      <div class="analyzing-icon">🔬</div>
+      <h2>쇼핑 DNA 분석 중...</h2>
+      <p>10개 답변을 살펴보고 있어요</p>
+    </div>
+  `;
+}
+
+async function renderResult() {
+  const key = calcResult();
+  const t   = TYPES[key];
+
+  const traits = t.traits.map(tr =>
+    `<li class="result-trait">
+       <div class="trait-dot"></div>
+       <span>${nl2br(tr)}</span>
+     </li>`
+  ).join('');
+
+  $app.innerHTML = `
+    <div class="prog-wrap"><div class="prog-fill" style="width:100%"></div></div>
+    <div class="view result-view anim-fade">
+      <div class="result-header">
+        <div class="result-emoji">${t.emoji}</div>
+        <div class="result-pill">나의 쇼핑 DNA</div>
+        <h2 class="result-name">${nl2br(t.name)}</h2>
+        <p class="result-tagline">${nl2br(t.tagline)}</p>
+      </div>
+
+      <div class="result-quote">${nl2br(t.quote)}</div>
+
+      <ul class="result-traits">${traits}</ul>
+
+      <div class="result-okn">${t.okn.replace(/\n/g,'<br>')}</div>
+
+      <div class="result-ctas">
+        <button class="btn btn-primary" onclick="doShare('${key}')">결과 공유하기</button>
+        <button class="btn btn-secondary" onclick="doShop()">맞는 공구 보러 가기</button>
+      </div>
+
+      <p class="hashtags">${nl2br(t.tags)}</p>
+    </div>
+  `;
+
+  await initFirebase();
+  saveToFirebase(key).catch(e => console.error('Save failed:', e));
+}
+
+/* ── 액션 ─────────────────────────────────────────────── */
+function goStart() {
+  step = 0;
+  answers = [];
+  quizStartTime = Date.now();
+  render();
+}
+
+function pick(idx) {
+  const btns = $app.querySelectorAll('.opt');
+  if (!btns[idx] || btns[idx].disabled) return;
+  btns.forEach(b => b.disabled = true);
+  btns[idx].classList.add('selected');
+  answers.push(idx);
+
+  if (step === TOTAL_Q - 1) {
+    setTimeout(() => {
+      renderAnalyzing();
+      setTimeout(() => { step = TOTAL_Q; render(); }, 1400);
+    }, 360);
+  } else {
+    setTimeout(() => { step++; render(); }, 350);
+  }
+}
+
+function doShare(key) {
+  const t    = TYPES[key];
+  const text = `나의 쇼핑 DNA는 "${t.name}"이에요!\n${t.tagline}\n\n${t.tags}`;
+  if (navigator.share) {
+    navigator.share({ title: '나의 쇼핑 DNA', text, url: location.href }).catch(() => {});
+  } else {
+    navigator.clipboard?.writeText(text)
+      .then(() => alert('결과가 복사됐어요!'))
+      .catch(() => alert(text));
+  }
+}
+
+function doShop() {
+  alert('맞는 공구 리스트로 이동해요.');
+}
+
+/* ── 시작 ─────────────────────────────────────────────── */
+initFirebase();
+render();
+</script>
+</body>
+</html>
