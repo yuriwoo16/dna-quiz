@@ -547,18 +547,18 @@ async function initFirebase() {
   if (db) return; // 이미 초기화됨
 
   try {
-    // Firebase 기본 스크립트 로드
-    await loadScript('https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js');
-    await loadScript('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js');
+    // Firebase SDK 로드 (compat 버전 - 호환성 높음)
+    await loadScript('https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js');
+    await loadScript('https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js');
 
     // Firebase 초기화
     if (window.firebase && window.firebase.apps.length === 0) {
       window.firebase.initializeApp(FIREBASE_CONFIG);
       db = window.firebase.firestore();
-      console.log('Firebase initialized');
+      console.log('Firebase initialized successfully');
     }
   } catch (e) {
-    console.warn('Firebase initialization failed:', e);
+    console.error('Firebase initialization failed:', e);
   }
 }
 
