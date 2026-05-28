@@ -286,7 +286,6 @@
     .result-quote {
       background: var(--surface);
       border-radius: 16px;
-      border-left: 3px solid var(--red);
       padding: 20px;
       font-size: 18px;
       font-weight: 700;
@@ -493,7 +492,7 @@ const TYPES = {
   },
   B: {
     emoji: "🌈",
-    name: "무드 쇼퍼",
+    name: "무드등 쇼퍼",
     tagline: "기분이 결정해요",
     quote: "오늘 기분 좋으니까 샀어요.\n그게 이유예요.",
     traits: [
@@ -502,7 +501,7 @@ const TYPES = {
       "'살까 말까'는 언제나 기분이 결정해줌"
     ],
     okn: "감성 맞는 브랜드 발견하는 게 쇼핑의 묘미죠.\n<strong>라이프스타일 공구</strong>, 분위기 좋은 것들 모아드릴게요.",
-    tags: "#무드쇼퍼 #기분이결정 #나의쇼핑DNA"
+    tags: "#무드등쇼퍼 #기분이결정 #나의쇼핑DNA"
   },
   C: {
     emoji: "💎",
@@ -532,7 +531,7 @@ const TYPES = {
   },
   E: {
     emoji: "👥",
-    name: "리뷰 신뢰자",
+    name: "별점 감별사",
     tagline: "후기 없으면 불안해요",
     quote: "다들 좋다고 하는 데는\n이유가 있는 거잖아요.",
     traits: [
@@ -541,11 +540,11 @@ const TYPES = {
       "좋은 거 발견하면 참지 못하고 바로 공유함"
     ],
     okn: "검증된 게 좋은 거 맞아요.\n<strong>참여율 높은 인기 공구</strong>, 믿고 참여해도 돼요.",
-    tags: "#리뷰신뢰자 #소셜쇼퍼 #나의쇼핑DNA"
+    tags: "#별점감별사 #소셜쇼퍼 #나의쇼핑DNA"
   },
   F: {
     emoji: "🔍",
-    name: "발굴 쇼퍼",
+    name: "신상 사냥꾼",
     tagline: "남들 모르는 거 먼저 찾아요",
     quote: "이걸 어디서 봤냐고요?\n저만 알고 있었어요.",
     traits: [
@@ -554,7 +553,7 @@ const TYPES = {
       "품절되면 비슷한 다른 거 찾는 게 또 재밌음"
     ],
     okn: "신규 브랜드를 가장 먼저 만나는 사람이 있어야죠.\n<strong>얼리버드 공구</strong>, 당신을 위해 준비했어요.",
-    tags: "#발굴쇼퍼 #탐험쇼퍼 #나의쇼핑DNA"
+    tags: "#신상사냥꾼 #탐험쇼퍼 #나의쇼핑DNA"
   }
 };
 
@@ -729,7 +728,7 @@ async function renderResult() {
         <p class="result-tagline">${nl2br(t.tagline)}</p>
       </div>
 
-      <div class="result-quote">${nl2br(t.quote)}</div>
+      <div class="result-quote">"${nl2br(t.quote)}"</div>
 
       <ul class="result-traits">${traits}</ul>
 
