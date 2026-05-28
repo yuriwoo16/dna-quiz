@@ -615,10 +615,10 @@ async function saveToFirebase(typeKey) {
 /* ── 렌더 ─────────────────────────────────────────────── */
 const $app = document.getElementById('app');
 
-function render() {
+async function render() {
   if (step === -1)      renderIntro();
   else if (step < 7)    renderQ();
-  else                  renderResult();
+  else                  await renderResult();
 }
 
 function renderIntro() {
@@ -668,7 +668,7 @@ function renderAnalyzing() {
   `;
 }
 
-function renderResult() {
+async function renderResult() {
   const key = calcResult();
   const t   = TYPES[key];
 
@@ -704,7 +704,8 @@ function renderResult() {
     </div>
   `;
 
-  // 결과 저장
+  // Firebase 초기화 대기 후 결과 저장
+  await initFirebase();
   saveToFirebase(key).catch(e => console.error('Save failed:', e));
 }
 
