@@ -76,17 +76,17 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       color: var(--red);
       background: var(--red-bg);
-      padding: 5px 14px;
+      padding: 6px 16px;
       border-radius: 100px;
       margin-bottom: 28px;
     }
 
     .intro-title {
-      font-size: 30px;
+      font-size: 34px;
       font-weight: 800;
       line-height: 1.35;
       color: var(--dark);
@@ -99,7 +99,7 @@
     }
 
     .intro-desc {
-      font-size: 15px;
+      font-size: 17px;
       color: var(--mid);
       line-height: 1.65;
       margin-bottom: 48px;
@@ -109,13 +109,13 @@
     .btn-start {
       display: block;
       width: 100%;
-      padding: 18px;
+      padding: 19px;
       background: var(--red);
       color: #fff;
       border: none;
       border-radius: 100px;
       font-family: inherit;
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 700;
       cursor: pointer;
       margin-bottom: 14px;
@@ -124,7 +124,7 @@
     .btn-start:active { opacity: .85; }
 
     .intro-note {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--light);
     }
 
@@ -140,7 +140,7 @@
     .step-bars {
       display: flex;
       gap: 3px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
       flex-shrink: 0;
     }
     .step-bar {
@@ -153,18 +153,26 @@
     .step-bar.done { background: var(--red); opacity: .45; }
     .step-bar.curr { background: var(--red); }
 
+    /* 씬 라벨 */
+    .q-scene {
+      font-size: 13px;
+      color: var(--light);
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+
     /* 질문 */
     .q-num {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--red);
       letter-spacing: .5px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       flex-shrink: 0;
     }
 
     .q-text {
-      font-size: 22px;
+      font-size: 26px;
       font-weight: 700;
       line-height: 1.45;
       color: var(--dark);
@@ -177,22 +185,22 @@
     /* 선택지 */
     .opts {
       flex-shrink: 0;
-      padding: 16px 0;
-      padding-bottom: calc(16px + env(safe-area-inset-bottom));
+      padding: 20px 0;
+      padding-bottom: calc(20px + env(safe-area-inset-bottom));
       display: flex;
       flex-direction: column;
-      gap: 9px;
+      gap: 10px;
     }
 
     .opt {
       width: 100%;
-      padding: 15px 20px;
+      padding: 18px 22px;
       border: 1.5px solid var(--border);
       border-radius: 16px;
       background: #fff;
       text-align: left;
       font-family: inherit;
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 500;
       color: var(--dark);
       line-height: 1.5;
@@ -216,7 +224,7 @@
       gap: 14px;
     }
     .analyzing-icon {
-      font-size: 52px;
+      font-size: 56px;
       animation: spin 1.2s linear infinite;
     }
     @keyframes spin {
@@ -224,12 +232,12 @@
       to   { transform: rotate(360deg); }
     }
     .analyzing h2 {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 700;
       color: var(--dark);
     }
     .analyzing p {
-      font-size: 14px;
+      font-size: 16px;
       color: var(--mid);
     }
 
@@ -250,7 +258,7 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 10px;
+      gap: 12px;
     }
     .result-emoji {
       width: 132px;
@@ -258,7 +266,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 60px;
+      font-size: 64px;
       margin-bottom: 4px;
       overflow: hidden;
     }
@@ -268,21 +276,21 @@
       object-fit: contain;
     }
     .result-pill {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--red);
       background: var(--red-bg);
-      padding: 4px 14px;
+      padding: 5px 16px;
       border-radius: 100px;
     }
     .result-name {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 800;
       color: var(--dark);
       line-height: 1.2;
     }
     .result-tagline {
-      font-size: 14px;
+      font-size: 16px;
       color: var(--mid);
       word-break: keep-all;
     }
@@ -290,8 +298,8 @@
     .result-quote {
       background: var(--surface);
       border-radius: 16px;
-      padding: 20px;
-      font-size: 18px;
+      padding: 22px;
+      font-size: 20px;
       font-weight: 700;
       color: var(--dark);
       line-height: 1.55;
@@ -302,12 +310,12 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
     }
     .result-trait {
       display: flex;
       gap: 10px;
-      font-size: 14px;
+      font-size: 16px;
       color: #4A4F62;
       line-height: 1.55;
       word-break: keep-all;
@@ -317,14 +325,14 @@
       border-radius: 50%;
       background: var(--red);
       flex-shrink: 0;
-      margin-top: 8px;
+      margin-top: 9px;
     }
 
     .result-okn {
       background: var(--red-bg);
       border-radius: 14px;
-      padding: 18px;
-      font-size: 13px;
+      padding: 20px;
+      font-size: 15px;
       color: #5A2035;
       line-height: 1.7;
       word-break: keep-all;
@@ -338,11 +346,11 @@
     }
     .btn {
       width: 100%;
-      padding: 17px;
+      padding: 18px;
       border: none;
       border-radius: 100px;
       font-family: inherit;
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 700;
       cursor: pointer;
       transition: opacity .15s;
@@ -352,11 +360,104 @@
     .btn-secondary { background: var(--surface); color: var(--dark); }
 
     .hashtags {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--red-soft);
       text-align: center;
       line-height: 1.8;
       word-break: break-word;
+    }
+
+    /* ── 모든 유형 보기 ─────────────────── */
+    .all-types-view {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .all-types-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 24px 16px;
+      flex-shrink: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .back-btn {
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 15px;
+      color: var(--mid);
+      cursor: pointer;
+      padding: 4px 0;
+      flex-shrink: 0;
+    }
+
+    .all-types-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .types-list {
+      padding: 20px 24px;
+      padding-bottom: calc(24px + env(safe-area-inset-bottom));
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .type-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      background: #fff;
+    }
+    .type-card.mine {
+      border-color: var(--red);
+      background: var(--red-bg);
+    }
+
+    .type-card-img {
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
+    }
+    .type-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .type-card-info {
+      flex: 1;
+    }
+    .type-card-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .type-card-tagline {
+      font-size: 14px;
+      color: var(--mid);
+    }
+
+    .type-mine-badge {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--red);
+      background: #fff;
+      border: 1.5px solid var(--red);
+      padding: 4px 10px;
+      border-radius: 100px;
+      flex-shrink: 0;
     }
 
     /* ── 전환 애니메이션 ─────────────────── */
@@ -372,111 +473,101 @@
     }
     .anim-fade { animation: fadeUp .32s ease forwards; }
   </style>
-  <!-- Firebase SDK compat 버전 (전역 window.firebase 사용 가능) -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 </head>
 <body>
 <div id="app"></div>
 <script>
-/* ── 문항 데이터 (10문항, 이탈율 최소화 순서) ──────────────── */
+/* ── 문항 데이터 (9문항, 2지선다, 시나리오 연결형) ──────────── */
 const QS = [
   {
-    text: "택배가 도착했다.\n내 택배 상자는",
+    scene: "🛍️ 쇼핑을 시작합니다",
+    text: "쇼핑 앱 켰어.\n솔직히 나는",
     opts: [
-      "작아. 딱 필요한 것만 주문했거든",
-      "보통. 몇 개 같이 왔겠지",
-      "여러 가지. 이것저것 눈에 띄는 거 다 담았어"
+      "살 것 정해두고 켰어. 딴 데 볼 시간 없어",
+      "그냥 심심해서 열었는데... 어느새 화면이 가득"
     ]
   },
   {
-    text: "인스타나 유튜브 보다가\n쇼핑한 적...",
+    scene: null,
+    text: "마음에 딱 드는 게 있어.\n근데 가격이 영 찜찜해.",
     opts: [
-      "자주 있어. 보다 보면 손이 가더라",
-      "가끔. 근데 사고 나서 후회할 때도 있어",
-      "거의 없어. 나는 필요할 때만 사"
+      "일단 다른 탭 열어서 최저가 검색 시작",
+      "이 정도면 내 마음이 원하는 거잖아. 그냥 사"
     ]
   },
   {
-    text: "세일/특가 알림이\n떴을 때",
+    scene: null,
+    text: "근처 매장에도 비슷한 게 있어.",
     opts: [
-      "바로 클릭해서 뭔지 봐",
-      "나중에 봐야지 하고 넘어감",
-      "대부분 무시해. 필요하면 내가 찾아봄"
+      "둘 다 꺼내놓고 꼼꼼히 따져봐서 결정해",
+      "굳이? 이미 첫 번째 거야. 마음이 거기 가 있어"
     ]
   },
   {
-    text: "쇼핑할 때\n나는...",
+    scene: null,
+    text: "결제 직전,\n리뷰가 단 하나도 없어.",
     opts: [
-      "살 것 정해두고 딱 그것만 찾아",
-      "일단 둘러보다 마음에 드는 거 담아",
-      "들어가면 어느새 장바구니가 가득"
+      "내가 첫 번째 개척자가 되면 되지",
+      "잠깐, 리뷰 있는 걸로 갈아탈게"
     ]
   },
   {
-    text: "맘에 드는 상품인데\n리뷰가 0개라면?",
+    scene: "🧾 결제 완료!",
+    text: "결제하고 딱 10분 뒤,\nSNS에 같은 거 더 싸게 파는\n광고가 떴어.",
     opts: [
-      "그냥 사. 내 눈을 믿어",
-      "좀 더 찾아보고 결정",
-      "리뷰 있는 걸로 바꿔"
+      "그거도 샀어. 어차피 더 싸니까",
+      "저장 박아뒀어. 다음에 써먹어야지"
     ]
   },
   {
-    text: "갖고 싶은 상품이\n품절되었을 때",
+    scene: "📦 며칠 후...",
+    text: "택배 뜯어보니까",
     opts: [
-      "재입고 알림 신청하고 기다려",
-      "어, 그러면 다른 거 뭐 있나 둘러봐",
-      "그냥 포기해. 인연이 아닌 거지"
+      "맞아 이거! 리뷰 보고 기다렸던 그거!",
+      "잠깐... 이게 뭐지? 내가 이걸 샀었나?"
     ]
   },
   {
-    text: "쇼핑 결제 직전에",
+    scene: "😭 품절의 벽",
+    text: "갖고 싶은 게 있는데\n품절이야.",
     opts: [
-      "한 번 더 고민하다 장바구니에 남겨둠",
-      "고민 없이 바로 결제",
-      "쿠폰/할인 더 없나 다시 뒤져봄"
+      "재입고 알림 ON. 기다릴 수 있어",
+      "어 그래? 그럼 다른 거 뭐 있나 봐야지"
     ]
   },
   {
-    text: "원하는 상품을\n비교할 때",
+    scene: "📱 SNS의 유혹",
+    text: "SNS 보다가\n진짜 예쁜 거 발견했어.",
     opts: [
-      "가격 비교 사이트까지 다 뒤져봄",
-      "후기 몇 개 읽고 결정",
-      "그냥 눈에 드는 거 바로 담아"
+      "손이 먼저 결제했어. 뇌는 나중에 알았고",
+      "저장만 해뒀어. 기분 좋은 날 사야지"
     ]
   },
   {
-    text: "공구에서\n제일 먼저 보는 건...",
+    scene: "💬 쇼핑 after",
+    text: "쇼핑하고 나서\n친구한테?",
     opts: [
-      "얼마나 모였나 (참여 현황)",
-      "마감까지 얼마나 남았나",
-      "상품 상세 설명"
-    ]
-  },
-  {
-    text: "쇼핑하고 나서\n주변에 공유하는 편이야?",
-    opts: [
-      "자주! 좋은 거 발견하면 바로 알려줌",
-      "가끔. 진짜 좋을 때만",
-      "거의 안 해. 쇼핑은 나만의 즐거움"
+      "카톡 바로 쐈어. \"나 이거 샀어 봐봐\"",
+      "왜 알려줘. 좋은 건 나만 알아야 해"
     ]
   }
 ];
 
 /* ── 판별 로직 ─────────────────────────────────────────── */
-// SCORE_MAP[질문인덱스][선택지인덱스] = 타입키
-// 각 타입 정확히 5회 등장 (10문항 × 3선택지 = 30, 6타입 × 5 = 30)
+// [A선택, B선택] → 타입키
+// 각 타입 정확히 3회 (9문항 × 2선택 = 18, 6타입 × 3 = 18)
 const SCORE_MAP = [
-  ['A', 'E', 'F'],  // Q1: 택배 상자
-  ['D', 'B', 'A'],  // Q2: SNS 쇼핑
-  ['D', 'B', 'F'],  // Q3: 세일 알림
-  ['A', 'F', 'D'],  // Q4: 쇼핑 방식
-  ['B', 'C', 'E'],  // Q5: 리뷰 0개
-  ['A', 'F', 'B'],  // Q6: 품절
-  ['A', 'D', 'C'],  // Q7: 결제 직전
-  ['C', 'E', 'B'],  // Q8: 비교
-  ['E', 'D', 'C'],  // Q9: 공구 확인
-  ['E', 'F', 'C'],  // Q10: 공유
+  ['A', 'F'],  // Q1: 앱 켰어
+  ['C', 'B'],  // Q2: 가격 찜찜
+  ['C', 'A'],  // Q3: 비슷한 매장
+  ['B', 'E'],  // Q4: 리뷰 없음
+  ['D', 'F'],  // Q5: 결제 후 더 싼 거
+  ['E', 'D'],  // Q6: 택배 도착
+  ['A', 'F'],  // Q7: 품절
+  ['D', 'B'],  // Q8: SNS 발견
+  ['E', 'C'],  // Q9: 공유 여부
 ];
 
 /* ── 유형 데이터 ───────────────────────────────────────── */
@@ -485,7 +576,7 @@ const TYPES = {
     emoji: "🎯",
     name: "스나이퍼 쇼퍼",
     tagline: "원하는 것만, 딱, 바로",
-    quote: "쇼핑에 시간 낭비 없어요.\n살 거 정했으면 그냥 사는 거죠.",
+    quote: "\"쇼핑에 시간 낭비 없어요.\n살 거 정했으면 그냥 사는 거죠.\"",
     traits: [
       "장바구니에 쓸데없는 게 없음",
       "검색창에 원하는 상품명을 정확히 입력함",
@@ -498,7 +589,7 @@ const TYPES = {
     emoji: "🌈",
     name: "무드등 쇼퍼",
     tagline: "기분이 결정해요",
-    quote: "오늘 기분 좋으니까 샀어요.\n그게 이유예요.",
+    quote: "\"오늘 기분 좋으니까 샀어요.\n그게 이유예요.\"",
     traits: [
       "예쁘면 사고, 마음이 동하면 사",
       "브랜드 감성이 맞으면 가격은 두 번째",
@@ -511,7 +602,7 @@ const TYPES = {
     emoji: "💎",
     name: "가성비 탐정",
     tagline: "최저가 아닌 거 사면 찝찝해요",
-    quote: "어딘가 더 싼 데 있을 것 같아서요.",
+    quote: "\"어딘가 더 싼 데 있을 것 같아서요.\"",
     traits: [
       "가격 비교는 기본, 성분/스펙 비교는 덤",
       "숨겨진 할인 쿠폰 찾는 거 은근 재밌음",
@@ -524,7 +615,7 @@ const TYPES = {
     emoji: "⚡",
     name: "번개 쇼퍼",
     tagline: "보면 사고, 사면 잊어요",
-    quote: "그 순간의 설렘이 진짜예요.\n나중에 오면 이미 늦어요.",
+    quote: "\"그 순간의 설렘이 진짜예요.\n나중에 오면 이미 늦어요.\"",
     traits: [
       "본 순간 결정됨, 고민 시간은 3초",
       "택배 오면 '이게 뭐였지?' 싶을 때 있음",
@@ -537,7 +628,7 @@ const TYPES = {
     emoji: "👥",
     name: "별점 감별사",
     tagline: "후기 없으면 불안해요",
-    quote: "다들 좋다고 하는 데는\n이유가 있는 거잖아요.",
+    quote: "\"다들 좋다고 하는 데는\n이유가 있는 거잖아요.\"",
     traits: [
       "리뷰 100개 이상인 상품에 안심감이 옴",
       "주변 추천 상품은 꼭 기억해뒀다가 삼",
@@ -550,7 +641,7 @@ const TYPES = {
     emoji: "🔍",
     name: "신상 사냥꾼",
     tagline: "남들 모르는 거 먼저 찾아요",
-    quote: "이걸 어디서 봤냐고요?\n저만 알고 있었어요.",
+    quote: "\"이걸 어디서 봤냐고요?\n저만 알고 있었어요.\"",
     traits: [
       "새 브랜드, 처음 보는 아이템이 더 설렘",
       "쇼핑 자체가 취미, 발굴하는 과정이 즐거움",
@@ -562,10 +653,12 @@ const TYPES = {
 };
 
 /* ── 앱 상태 ──────────────────────────────────────────── */
-const TOTAL_Q = 10;
-let step    = -1;
+const TOTAL_Q  = 9;
+let step       = -1;
 let quizStartTime = null;
-let answers = [];
+let answers    = [];
+let myResultKey = null;
+let hasSaved   = false;
 
 /* ── Firebase 초기화 ──────────────────────────────────── */
 const FIREBASE_CONFIG = {
@@ -590,10 +683,8 @@ async function initFirebase() {
     if (window.firebase && window.firebase.apps.length === 0) {
       firebase.initializeApp(FIREBASE_CONFIG);
       db = firebase.firestore();
-      console.log('Firebase initialized');
     } else if (window.firebase && window.firebase.apps.length > 0) {
       db = firebase.firestore();
-      console.log('Firebase already initialized');
     }
   } catch (e) {
     console.error('Firebase init failed:', e);
@@ -615,43 +706,33 @@ function calcResult() {
   return Object.entries(sc).sort((a,b) => b[1]-a[1])[0][0];
 }
 
-/* ── Firebase 데이터 저장 ─────────────────────────────── */
+/* ── Firebase 저장 ────────────────────────────────────── */
 async function saveToFirebase(typeKey) {
-  if (!db) {
-    console.warn('Firebase not initialized');
-    return;
-  }
+  if (!db) return;
   try {
     const ua = navigator.userAgent;
     const isMobile = /iPhone|Android.*Mobile|BlackBerry|IEMobile/.test(ua);
     const isTablet = /iPad|Android(?!.*Mobile)/.test(ua);
     const deviceType = isMobile ? 'mobile' : isTablet ? 'tablet' : 'desktop';
-
     const referrer = document.referrer || 'direct';
     const isKakao  = /KAKAO/i.test(ua);
     const source   = isKakao ? 'kakao'
                    : referrer.includes('instagram') ? 'instagram'
                    : referrer === 'direct' ? 'direct' : 'other';
-
     const data = {
       type: typeKey,
       answers: answers,
       timestamp: new Date().toISOString(),
       durationSec: quizStartTime ? Math.round((Date.now() - quizStartTime) / 1000) : null,
-      deviceType: deviceType,
-      screenWidth: window.innerWidth,
-      source: source,
-      referrer: referrer.substring(0, 100),
+      deviceType, screenWidth: window.innerWidth,
+      source, referrer: referrer.substring(0, 100),
       lang: navigator.language || 'unknown',
       userAgent: ua.substring(0, 150)
     };
-
     const result = await db.collection('shopping_results').add(data);
-    console.log('Saved to Firebase:', result.id);
-    return true;
+    console.log('Saved:', result.id);
   } catch (e) {
     console.error('Firebase save error:', e);
-    return false;
   }
 }
 
@@ -659,9 +740,9 @@ async function saveToFirebase(typeKey) {
 const $app = document.getElementById('app');
 
 async function render() {
-  if (step === -1)            renderIntro();
+  if (step === -1)           renderIntro();
   else if (step < TOTAL_Q)   renderQ();
-  else                        await renderResult();
+  else                       await renderResult();
 }
 
 function renderIntro() {
@@ -669,9 +750,9 @@ function renderIntro() {
     <div class="view intro">
       <div class="intro-badge">🛍️ 나의 쇼핑 DNA</div>
       <h1 class="intro-title">쇼핑할 때<br>나는 어떤<br><em>사람</em>일까?</h1>
-      <p class="intro-desc">10개 질문으로 알아보는<br>나만의 쇼핑 심리 유형</p>
+      <p class="intro-desc">9개 질문으로 알아보는<br>나만의 쇼핑 심리 유형</p>
       <button class="btn-start" onclick="goStart()">지금 바로 →</button>
-      <p class="intro-note">10개 질문 · 2분이면 완료</p>
+      <p class="intro-note">9개 질문 · 1분이면 완료</p>
     </div>
   `;
 }
@@ -693,6 +774,7 @@ function renderQ() {
     <div class="prog-wrap"><div class="prog-fill" style="width:${pct}%"></div></div>
     <div class="view qview anim-slide">
       <div class="step-bars">${bars}</div>
+      ${q.scene ? `<div class="q-scene">${q.scene}</div>` : ''}
       <div class="q-num">Q${step + 1} / ${TOTAL_Q}</div>
       <div class="q-text">${nl2br(q.text)}</div>
       <div class="opts">${opts}</div>
@@ -706,13 +788,14 @@ function renderAnalyzing() {
     <div class="view analyzing">
       <div class="analyzing-icon">🔬</div>
       <h2>쇼핑 DNA 분석 중...</h2>
-      <p>10개 답변을 살펴보고 있어요</p>
+      <p>9개 답변을 살펴보고 있어요</p>
     </div>
   `;
 }
 
 async function renderResult() {
-  const key = calcResult();
+  myResultKey = myResultKey || calcResult();
+  const key = myResultKey;
   const t   = TYPES[key];
 
   const traits = t.traits.map(tr =>
@@ -732,7 +815,7 @@ async function renderResult() {
         <p class="result-tagline">${nl2br(t.tagline)}</p>
       </div>
 
-      <div class="result-quote">"${nl2br(t.quote)}"</div>
+      <div class="result-quote">${nl2br(t.quote)}</div>
 
       <ul class="result-traits">${traits}</ul>
 
@@ -740,21 +823,58 @@ async function renderResult() {
 
       <div class="result-ctas">
         <button class="btn btn-primary" onclick="doShare('${key}')">결과 공유하기</button>
-        <button class="btn btn-secondary" onclick="doShop()">맞는 공구 보러 가기</button>
+        <button class="btn btn-secondary" onclick="renderAllTypes()">모든 유형 보러가기</button>
+        <button class="btn btn-secondary" onclick="doShop()">맞는 공구 보러가기</button>
       </div>
 
       <p class="hashtags">${nl2br(t.tags)}</p>
     </div>
   `;
 
-  await initFirebase();
-  saveToFirebase(key).catch(e => console.error('Save failed:', e));
+  if (!hasSaved) {
+    hasSaved = true;
+    await initFirebase();
+    saveToFirebase(key).catch(e => console.error('Save failed:', e));
+  }
+}
+
+function renderAllTypes() {
+  const typeOrder = ['A', 'B', 'C', 'D', 'E', 'F'];
+  const cards = typeOrder.map(key => {
+    const t = TYPES[key];
+    const isMine = key === myResultKey;
+    return `
+      <div class="type-card ${isMine ? 'mine' : ''}">
+        <div class="type-card-img">
+          <img src="img/type-${key}.png" alt="${t.name}">
+        </div>
+        <div class="type-card-info">
+          <div class="type-card-name">${t.name}</div>
+          <div class="type-card-tagline">${t.tagline}</div>
+        </div>
+        ${isMine ? '<span class="type-mine-badge">나의 유형</span>' : ''}
+      </div>
+    `;
+  }).join('');
+
+  $app.innerHTML = `
+    <div class="prog-wrap"><div class="prog-fill" style="width:100%"></div></div>
+    <div class="view all-types-view anim-fade">
+      <div class="all-types-header">
+        <button class="back-btn" onclick="render()">← 내 결과로</button>
+        <span class="all-types-title">모든 쇼핑 유형</span>
+      </div>
+      <div class="types-list">${cards}</div>
+    </div>
+  `;
 }
 
 /* ── 액션 ─────────────────────────────────────────────── */
 function goStart() {
   step = 0;
   answers = [];
+  myResultKey = null;
+  hasSaved = false;
   quizStartTime = Date.now();
   render();
 }
