@@ -61,12 +61,16 @@
     }
     .intro-title {
       font-size: 38px; font-weight: 800; line-height: 1.25;
-      color: var(--dark); margin-bottom: 18px; word-break: keep-all;
+      color: var(--dark); margin-bottom: 24px; word-break: keep-all;
     }
     .intro-title em { color: var(--red); font-style: normal; }
+    .intro-main-img {
+      width: 200px; height: 200px; object-fit: contain;
+      margin-bottom: 20px; flex-shrink: 0;
+    }
     .intro-desc {
       font-size: 17px; color: var(--mid); line-height: 1.65;
-      margin-bottom: 48px; word-break: keep-all;
+      margin-bottom: 32px; word-break: keep-all;
     }
     .btn-start {
       display: block; width: 100%; padding: 19px;
@@ -594,6 +598,7 @@ function renderIntro() {
   $app.innerHTML = `
     <div class="view intro">
       <h1 class="intro-title">혹시 나만<br>이렇게<br><em>쇼핑해?</em></h1>
+      <img class="intro-main-img" src="img/main.png" alt="">
       <p class="intro-desc">당신의 쇼핑 본능을 파헤쳐 보세요.</p>
       <button class="btn-start" onclick="goStart()">내 유형 1분 진단 →</button>
       <p class="intro-note"><strong class="intro-count">2,234명</strong>이 참여했어요</p>
