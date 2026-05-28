@@ -44,433 +44,213 @@
     }
 
     /* ── 진행 바 ────────────────────────── */
-    .prog-wrap {
-      flex-shrink: 0;
-      height: 3px;
-      background: var(--border);
-    }
-    .prog-fill {
-      height: 100%;
-      background: var(--red);
-      transition: width 0.4s cubic-bezier(.4,0,.2,1);
-    }
+    .prog-wrap { flex-shrink: 0; height: 3px; background: var(--border); }
+    .prog-fill  { height: 100%; background: var(--red); transition: width 0.4s cubic-bezier(.4,0,.2,1); }
 
     /* ── 공통 뷰 ────────────────────────── */
-    .view {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
+    .view { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
     /* ── 인트로 ─────────────────────────── */
     .intro {
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+      justify-content: center; align-items: center; text-align: center;
       padding: 40px 32px;
       padding-bottom: calc(40px + env(safe-area-inset-bottom));
     }
-
     .intro-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--red);
-      background: var(--red-bg);
-      padding: 6px 16px;
-      border-radius: 100px;
-      margin-bottom: 28px;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; font-weight: 700; color: var(--red);
+      background: var(--red-bg); padding: 6px 16px;
+      border-radius: 100px; margin-bottom: 28px;
     }
-
     .intro-title {
-      font-size: 34px;
-      font-weight: 800;
-      line-height: 1.35;
-      color: var(--dark);
-      margin-bottom: 14px;
-      word-break: keep-all;
+      font-size: 34px; font-weight: 800; line-height: 1.35;
+      color: var(--dark); margin-bottom: 14px; word-break: keep-all;
     }
-    .intro-title em {
-      color: var(--red);
-      font-style: normal;
-    }
-
+    .intro-title em { color: var(--red); font-style: normal; }
     .intro-desc {
-      font-size: 17px;
-      color: var(--mid);
-      line-height: 1.65;
-      margin-bottom: 48px;
-      word-break: keep-all;
+      font-size: 17px; color: var(--mid); line-height: 1.65;
+      margin-bottom: 48px; word-break: keep-all;
     }
-
     .btn-start {
-      display: block;
-      width: 100%;
-      padding: 19px;
-      background: var(--red);
-      color: #fff;
-      border: none;
-      border-radius: 100px;
-      font-family: inherit;
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-bottom: 14px;
-      transition: opacity .15s;
+      display: block; width: 100%; padding: 19px;
+      background: var(--red); color: #fff; border: none;
+      border-radius: 100px; font-family: inherit; font-size: 18px;
+      font-weight: 700; cursor: pointer; margin-bottom: 14px; transition: opacity .15s;
     }
     .btn-start:active { opacity: .85; }
-
-    .intro-note {
-      font-size: 14px;
-      color: var(--light);
-    }
+    .intro-note { font-size: 14px; color: var(--light); }
 
     /* ── 문항 화면 ──────────────────────── */
-    .qview {
-      padding: 20px 24px 0;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* 스텝 바 */
-    .step-bars {
-      display: flex;
-      gap: 3px;
-      margin-bottom: 28px;
-      flex-shrink: 0;
-    }
+    .qview { padding: 20px 24px 0; flex: 1; display: flex; flex-direction: column; }
+    .step-bars { display: flex; gap: 3px; margin-bottom: 28px; flex-shrink: 0; }
     .step-bar {
-      flex: 1;
-      height: 3px;
-      border-radius: 2px;
-      background: var(--border);
-      transition: background .3s;
+      flex: 1; height: 3px; border-radius: 2px;
+      background: var(--border); transition: background .3s;
     }
     .step-bar.done { background: var(--red); opacity: .45; }
     .step-bar.curr { background: var(--red); }
 
-    /* 씬 라벨 */
-    .q-scene {
-      font-size: 13px;
-      color: var(--light);
-      margin-bottom: 10px;
-      flex-shrink: 0;
-    }
-
-    /* 질문 */
+    .q-scene { font-size: 13px; color: var(--light); margin-bottom: 10px; flex-shrink: 0; }
     .q-num {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--red);
-      letter-spacing: .5px;
-      margin-bottom: 14px;
-      flex-shrink: 0;
+      font-size: 13px; font-weight: 700; color: var(--red);
+      letter-spacing: .5px; margin-bottom: 14px; flex-shrink: 0;
     }
-
     .q-text {
-      font-size: 26px;
-      font-weight: 700;
-      line-height: 1.45;
-      color: var(--dark);
-      word-break: keep-all;
-      flex: 1;
-      display: flex;
-      align-items: center;
+      font-size: 26px; font-weight: 700; line-height: 1.45;
+      color: var(--dark); word-break: keep-all; flex: 1;
+      display: flex; align-items: center;
     }
-
-    /* 선택지 */
     .opts {
-      flex-shrink: 0;
-      padding: 20px 0;
+      flex-shrink: 0; padding: 20px 0;
       padding-bottom: calc(20px + env(safe-area-inset-bottom));
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      display: flex; flex-direction: column; gap: 10px;
     }
-
     .opt {
-      width: 100%;
-      padding: 18px 22px;
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      background: #fff;
-      text-align: left;
-      font-family: inherit;
-      font-size: 17px;
-      font-weight: 500;
-      color: var(--dark);
-      line-height: 1.5;
-      cursor: pointer;
-      word-break: keep-all;
+      width: 100%; padding: 18px 22px;
+      border: 1.5px solid var(--border); border-radius: 16px;
+      background: #fff; text-align: left; font-family: inherit;
+      font-size: 17px; font-weight: 500; color: var(--dark);
+      line-height: 1.5; cursor: pointer; word-break: keep-all;
       transition: background .14s, border-color .14s, color .14s, transform .1s;
     }
     .opt:active:not(:disabled) { transform: scale(.985); }
-    .opt.selected {
-      background: var(--red);
-      border-color: var(--red);
-      color: #fff;
-    }
+    .opt.selected { background: var(--red); border-color: var(--red); color: #fff; }
     .opt:disabled { cursor: default; }
 
     /* ── 분석 중 ────────────────────────── */
-    .analyzing {
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      gap: 14px;
-    }
-    .analyzing-icon {
-      font-size: 56px;
-      animation: spin 1.2s linear infinite;
-    }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-    .analyzing h2 {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--dark);
-    }
-    .analyzing p {
-      font-size: 16px;
-      color: var(--mid);
-    }
+    .analyzing { justify-content: center; align-items: center; text-align: center; gap: 14px; }
+    .analyzing-icon { font-size: 56px; animation: spin 1.2s linear infinite; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .analyzing h2 { font-size: 22px; font-weight: 700; color: var(--dark); }
+    .analyzing p  { font-size: 16px; color: var(--mid); }
 
-    /* ── 결과 화면 ──────────────────────── */
+    /* ── 결과 / 상세 화면 ───────────────── */
     .result-view {
-      flex: 1;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      padding: 32px 24px;
+      flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
+      padding: 24px 24px 32px;
       padding-bottom: calc(32px + env(safe-area-inset-bottom));
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+      display: flex; flex-direction: column; gap: 20px;
     }
-
+    .detail-header {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .back-btn {
+      background: none; border: none; font-family: inherit;
+      font-size: 15px; color: var(--mid); cursor: pointer; padding: 4px 0;
+    }
     .result-header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 12px;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 12px;
     }
     .result-emoji {
-      width: 132px;
-      height: 132px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 64px;
-      margin-bottom: 4px;
-      overflow: hidden;
+      width: 132px; height: 132px; display: flex;
+      align-items: center; justify-content: center;
+      font-size: 64px; margin-bottom: 4px; overflow: hidden;
     }
-    .result-emoji img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
+    .result-emoji img { width: 100%; height: 100%; object-fit: contain; }
     .result-pill {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--red);
-      background: var(--red-bg);
-      padding: 5px 16px;
-      border-radius: 100px;
+      font-size: 13px; font-weight: 700; color: var(--red);
+      background: var(--red-bg); padding: 5px 16px; border-radius: 100px;
     }
-    .result-name {
-      font-size: 32px;
-      font-weight: 800;
-      color: var(--dark);
-      line-height: 1.2;
-    }
-    .result-tagline {
-      font-size: 16px;
-      color: var(--mid);
-      word-break: keep-all;
-    }
+    .result-name { font-size: 32px; font-weight: 800; color: var(--dark); line-height: 1.2; }
+    .result-tagline { font-size: 16px; color: var(--mid); word-break: keep-all; }
 
     .result-quote {
-      background: var(--surface);
-      border-radius: 16px;
-      padding: 22px;
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--dark);
-      line-height: 1.55;
-      word-break: keep-all;
+      background: var(--surface); border-radius: 16px; padding: 22px;
+      font-size: 20px; font-weight: 700; color: var(--dark);
+      line-height: 1.55; word-break: keep-all;
     }
-
-    .result-traits {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
+    .result-traits { list-style: none; display: flex; flex-direction: column; gap: 14px; }
     .result-trait {
-      display: flex;
-      gap: 10px;
-      font-size: 16px;
-      color: #4A4F62;
-      line-height: 1.55;
-      word-break: keep-all;
+      display: flex; gap: 10px; font-size: 16px;
+      color: #4A4F62; line-height: 1.55; word-break: keep-all;
     }
     .trait-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--red);
-      flex-shrink: 0;
-      margin-top: 9px;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--red); flex-shrink: 0; margin-top: 9px;
     }
 
-    .result-okn {
-      background: var(--red-bg);
-      border-radius: 14px;
-      padding: 20px;
-      font-size: 15px;
-      color: #5A2035;
-      line-height: 1.7;
+    /* ── 진단 보고서 박스 ────────────────── */
+    .diag-box {
+      background: var(--red-bg); border-radius: 16px;
+      padding: 20px; display: flex; flex-direction: column; gap: 16px;
+    }
+    .diag-title { font-size: 14px; font-weight: 700; color: var(--red); }
+    .diag-metrics { display: flex; flex-direction: column; gap: 10px; }
+    .diag-row { display: flex; align-items: center; gap: 10px; }
+    .diag-label {
+      font-size: 13px; color: #5A2035;
+      width: 76px; flex-shrink: 0; font-weight: 500;
+    }
+    .diag-bar { flex: 1; font-size: 13px; letter-spacing: 2px; }
+    .dot-on  { color: var(--red); }
+    .dot-off { color: #F5C0D0; }
+    .diag-level {
+      font-size: 11px; font-weight: 700;
+      flex-shrink: 0; width: 26px; text-align: right;
+    }
+    .diag-level.high { color: var(--red); }
+    .diag-level.mid  { color: var(--mid); }
+    .diag-level.low  { color: var(--light); }
+    .diag-divider { height: 1px; background: #F5C0D0; }
+    .diag-text {
+      font-size: 14px; color: #5A2035; line-height: 1.75;
       word-break: keep-all;
     }
-    .result-okn strong { color: var(--red); font-weight: 700; }
 
-    .result-ctas {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    /* ── CTA ────────────────────────────── */
+    .result-ctas { display: flex; flex-direction: column; gap: 10px; }
     .btn {
-      width: 100%;
-      padding: 18px;
-      border: none;
-      border-radius: 100px;
-      font-family: inherit;
-      font-size: 17px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: opacity .15s;
+      width: 100%; padding: 18px; border: none; border-radius: 100px;
+      font-family: inherit; font-size: 17px; font-weight: 700;
+      cursor: pointer; transition: opacity .15s;
     }
     .btn:active { opacity: .8; }
     .btn-primary   { background: var(--red); color: #fff; }
     .btn-secondary { background: var(--surface); color: var(--dark); }
-
     .hashtags {
-      font-size: 14px;
-      color: var(--red-soft);
-      text-align: center;
-      line-height: 1.8;
-      word-break: break-word;
+      font-size: 14px; color: var(--red-soft); text-align: center;
+      line-height: 1.8; word-break: break-word;
     }
 
     /* ── 모든 유형 보기 ─────────────────── */
-    .all-types-view {
-      flex: 1;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      display: flex;
-      flex-direction: column;
-    }
-
+    .all-types-view { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; display: flex; flex-direction: column; }
     .all-types-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 20px 24px 16px;
-      flex-shrink: 0;
+      display: flex; align-items: center; gap: 12px;
+      padding: 20px 24px 16px; flex-shrink: 0;
       border-bottom: 1px solid var(--border);
     }
-
-    .back-btn {
-      background: none;
-      border: none;
-      font-family: inherit;
-      font-size: 15px;
-      color: var(--mid);
-      cursor: pointer;
-      padding: 4px 0;
-      flex-shrink: 0;
-    }
-
-    .all-types-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--dark);
-    }
-
+    .all-types-title { font-size: 18px; font-weight: 700; color: var(--dark); }
     .types-list {
       padding: 20px 24px;
       padding-bottom: calc(24px + env(safe-area-inset-bottom));
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      display: flex; flex-direction: column; gap: 12px;
     }
-
     .type-card {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px;
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      background: #fff;
+      display: flex; align-items: center; gap: 16px; padding: 16px;
+      border: 1.5px solid var(--border); border-radius: 16px;
+      background: #fff; cursor: pointer;
+      transition: border-color .15s, background .15s;
     }
-    .type-card.mine {
-      border-color: var(--red);
-      background: var(--red-bg);
-    }
-
-    .type-card-img {
-      width: 60px;
-      height: 60px;
-      flex-shrink: 0;
-    }
-    .type-card-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .type-card-info {
-      flex: 1;
-    }
-    .type-card-name {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 4px;
-    }
-    .type-card-tagline {
-      font-size: 14px;
-      color: var(--mid);
-    }
-
+    .type-card:active { background: var(--surface); }
+    .type-card.mine { border-color: var(--red); background: var(--red-bg); }
+    .type-card-img { width: 60px; height: 60px; flex-shrink: 0; }
+    .type-card-img img { width: 100%; height: 100%; object-fit: contain; }
+    .type-card-info { flex: 1; }
+    .type-card-name { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+    .type-card-tagline { font-size: 14px; color: var(--mid); }
     .type-mine-badge {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--red);
-      background: #fff;
-      border: 1.5px solid var(--red);
-      padding: 4px 10px;
-      border-radius: 100px;
-      flex-shrink: 0;
+      font-size: 12px; font-weight: 700; color: var(--red);
+      background: #fff; border: 1.5px solid var(--red);
+      padding: 4px 10px; border-radius: 100px; flex-shrink: 0;
     }
+    .type-card-arrow { font-size: 20px; color: var(--light); flex-shrink: 0; }
 
-    /* ── 전환 애니메이션 ─────────────────── */
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(18px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
+    /* ── 애니메이션 ──────────────────────── */
+    @keyframes slideIn { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: translateX(0); } }
     .anim-slide { animation: slideIn .22s ease forwards; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     .anim-fade { animation: fadeUp .32s ease forwards; }
   </style>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -479,30 +259,38 @@
 <body>
 <div id="app"></div>
 <script>
-/* ── 문항 데이터 (9문항, 2지선다, 시나리오 연결형) ──────────── */
+/* ── 문항 데이터 (8문항, 2지선다, 시나리오 연결형) ──────────── */
 const QS = [
   {
-    scene: "🛍️ 쇼핑을 시작합니다",
-    text: "쇼핑 앱 켰어.\n솔직히 나는",
+    scene: "🛍️ 쇼핑 시작",
+    text: "오늘 쇼핑 앱 열었어.\n솔직히 켠 이유는",
     opts: [
-      "살 것 정해두고 켰어. 딴 데 볼 시간 없어",
-      "그냥 심심해서 열었는데... 어느새 화면이 가득"
+      "살 게 있어서. 목적 있음",
+      "그냥 심심해서. 이유 없음"
     ]
   },
   {
     scene: null,
-    text: "마음에 딱 드는 게 있어.\n근데 가격이 영 찜찜해.",
+    text: "앱 열자마자 찜목록 봤더니,\n갖고 싶었던 게 품절이야.",
     opts: [
-      "일단 다른 탭 열어서 최저가 검색 시작",
-      "이 정도면 내 마음이 원하는 거잖아. 그냥 사"
+      "재입고 알림 ON. 기다릴 수 있어",
+      "아쉽지만 다른 거 뭐 있나 둘러봐"
     ]
   },
   {
     scene: null,
-    text: "근처 매장에도 비슷한 게 있어.",
+    text: "아쉬운 마음에 다른 거 둘러보다가\n마음에 딱 드는 게 눈에 들어왔어.\n근데 가격이 좀 애매해.",
     opts: [
-      "둘 다 꺼내놓고 꼼꼼히 따져봐서 결정해",
-      "굳이? 이미 첫 번째 거야. 마음이 거기 가 있어"
+      "다른 데서 최저가 검색 시작",
+      "맘에 들면 사는 거지. 바로 담아"
+    ]
+  },
+  {
+    scene: null,
+    text: "다른 앱에도 비슷한 게 있어.",
+    opts: [
+      "둘 다 꺼내놓고 꼼꼼히 비교해서 결정",
+      "굳이? 이미 마음은 처음 봤던 거야"
     ]
   },
   {
@@ -514,11 +302,11 @@ const QS = [
     ]
   },
   {
-    scene: "🧾 결제 완료!",
-    text: "결제하고 딱 10분 뒤,\nSNS에 같은 거 더 싸게 파는\n광고가 떴어.",
+    scene: "✅ 결제 완료!",
+    text: "다 결제했어. 그런데 알고리즘이\n방금 산 것과 비슷한 걸 더 싸게\n보여줬어.",
     opts: [
-      "그거도 샀어. 어차피 더 싸니까",
-      "저장 박아뒀어. 다음에 써먹어야지"
+      "취소하고 다시 산다. 더 싼 게 맞잖아",
+      "이미 샀으니까 무시한다. 내 선택이 맞아"
     ]
   },
   {
@@ -526,28 +314,12 @@ const QS = [
     text: "택배 뜯어보니까",
     opts: [
       "맞아 이거! 리뷰 보고 기다렸던 그거!",
-      "잠깐... 이게 뭐지? 내가 이걸 샀었나?"
+      "어? 이게 뭐였지? 너무 많이 샀나..."
     ]
   },
   {
-    scene: "😭 품절의 벽",
-    text: "갖고 싶은 게 있는데\n품절이야.",
-    opts: [
-      "재입고 알림 ON. 기다릴 수 있어",
-      "어 그래? 그럼 다른 거 뭐 있나 봐야지"
-    ]
-  },
-  {
-    scene: "📱 SNS의 유혹",
-    text: "SNS 보다가\n진짜 예쁜 거 발견했어.",
-    opts: [
-      "손이 먼저 결제했어. 뇌는 나중에 알았고",
-      "저장만 해뒀어. 기분 좋은 날 사야지"
-    ]
-  },
-  {
-    scene: "💬 쇼핑 after",
-    text: "쇼핑하고 나서\n친구한테?",
+    scene: "💬 마무리",
+    text: "택배 뜯었어. 친구한테?",
     opts: [
       "카톡 바로 쐈어. \"나 이거 샀어 봐봐\"",
       "왜 알려줘. 좋은 건 나만 알아야 해"
@@ -556,19 +328,31 @@ const QS = [
 ];
 
 /* ── 판별 로직 ─────────────────────────────────────────── */
-// [A선택, B선택] → 타입키
-// 각 타입 정확히 3회 (9문항 × 2선택 = 18, 6타입 × 3 = 18)
+// [A선택, B선택] → 타입키 / 8문항×2 = 16슬롯 / 6타입 분배
 const SCORE_MAP = [
-  ['A', 'F'],  // Q1: 앱 켰어
-  ['C', 'B'],  // Q2: 가격 찜찜
-  ['C', 'A'],  // Q3: 비슷한 매장
-  ['B', 'E'],  // Q4: 리뷰 없음
-  ['D', 'F'],  // Q5: 결제 후 더 싼 거
-  ['E', 'D'],  // Q6: 택배 도착
-  ['A', 'F'],  // Q7: 품절
-  ['D', 'B'],  // Q8: SNS 발견
-  ['E', 'C'],  // Q9: 공유 여부
+  ['A', 'F'],  // Q1: 앱 켰어 (목적 / 심심)
+  ['A', 'F'],  // Q2: 품절 (알림 / 둘러봐)
+  ['C', 'B'],  // Q3: 가격 고민 (최저가 / 바로 담아)
+  ['C', 'A'],  // Q4: 비교 (꼼꼼히 / 처음 봤던 거)
+  ['B', 'E'],  // Q5: 리뷰 없음 (개척자 / 갈아타)
+  ['D', 'F'],  // Q6: 알고리즘 (취소 / 무시)
+  ['E', 'D'],  // Q7: 택배 (기다렸던 그거 / 이게뭐지)
+  ['E', 'C'],  // Q8: 공유 (카톡 / 왜알려줘)
 ];
+// A:3 B:2 C:3 D:2 E:3 F:3 → 총 16
+
+/* ── 진단 지표 헬퍼 ────────────────────────────────────── */
+function diagRow(label, filled) {
+  const level    = filled >= 6 ? '높음' : filled >= 4 ? '중간' : '낮음';
+  const cls      = filled >= 6 ? 'high' : filled >= 4 ? 'mid'  : 'low';
+  const on       = '<span class="dot-on">'  + '●'.repeat(filled)     + '</span>';
+  const off      = '<span class="dot-off">' + '●'.repeat(8 - filled) + '</span>';
+  return `<div class="diag-row">
+    <span class="diag-label">${label}</span>
+    <span class="diag-bar">${on}${off}</span>
+    <span class="diag-level ${cls}">${level}</span>
+  </div>`;
+}
 
 /* ── 유형 데이터 ───────────────────────────────────────── */
 const TYPES = {
@@ -582,7 +366,15 @@ const TYPES = {
       "검색창에 원하는 상품명을 정확히 입력함",
       "세일 없어도 필요하면 사고, 세일 있어도 필요 없으면 안 삼"
     ],
-    okn: "정확한 취향을 아는 게 최고의 쇼핑 능력이에요.\n<strong>관심 카테고리 신규 공구</strong>, 먼저 알려드릴게요.",
+    diag: {
+      metrics: [
+        { label: '계획성',   filled: 8 },
+        { label: '충동성',   filled: 2 },
+        { label: '정보 탐색', filled: 4 },
+        { label: '손실 회피', filled: 4 },
+      ],
+      text: "목표가 명확할 때 가장 빠르게 결정합니다.\n필요 없는 정보는 처음부터 차단하고,\n한번 결정하면 잘 바꾸지 않습니다.\n새로운 카테고리 진입 시에만 탐색량이 급증하는\n효율 극대화형 소비 패턴입니다."
+    },
     tags: "#스나이퍼쇼퍼 #목적지향 #나의쇼핑DNA"
   },
   B: {
@@ -595,7 +387,15 @@ const TYPES = {
       "브랜드 감성이 맞으면 가격은 두 번째",
       "'살까 말까'는 언제나 기분이 결정해줌"
     ],
-    okn: "감성 맞는 브랜드 발견하는 게 쇼핑의 묘미죠.\n<strong>라이프스타일 공구</strong>, 분위기 좋은 것들 모아드릴게요.",
+    diag: {
+      metrics: [
+        { label: '감성 반응성', filled: 8 },
+        { label: '계획성',    filled: 4 },
+        { label: '사회적 증거', filled: 2 },
+        { label: '충동성',    filled: 4 },
+      ],
+      text: "구매 트리거는 논리가 아닌 감각입니다.\n브랜드 분위기, 색감, 문구에 강하게 반응하며\n기분 상태가 구매 금액과 비례하는 경향이 있습니다.\n현재의 감정이 소비 행동을 주도하는\nPromotion Focus 유형입니다."
+    },
     tags: "#무드등쇼퍼 #기분이결정 #나의쇼핑DNA"
   },
   C: {
@@ -604,11 +404,19 @@ const TYPES = {
     tagline: "최저가 아닌 거 사면 찝찝해요",
     quote: "\"어딘가 더 싼 데 있을 것 같아서요.\"",
     traits: [
-      "가격 비교는 기본, 성분/스펙 비교는 덤",
+      "가격 비교는 기본, 성분·스펙 비교는 덤",
       "숨겨진 할인 쿠폰 찾는 거 은근 재밌음",
       "좋은 딜 발견하면 혼자 간직함"
     ],
-    okn: "이미 최저가인데 더 알뜰하게 드릴 수 있어요.\n<strong>공동구매 원가 절감</strong>, 혼자 사는 것보다 확실히 싸요.",
+    diag: {
+      metrics: [
+        { label: '정보 탐색', filled: 8 },
+        { label: '손실 회피', filled: 8 },
+        { label: '충동성',   filled: 2 },
+        { label: '사회적 증거', filled: 4 },
+      ],
+      text: "최저가를 확인하지 못하면 구매 자체를 보류합니다.\n정보 과부하 상황에서도 비교를 멈추지 않으며,\n좋은 딜을 발견해도 타인과 공유하지 않는\n독립적 정보 처리 패턴을 보입니다."
+    },
     tags: "#가성비탐정 #최저가사냥꾼 #나의쇼핑DNA"
   },
   D: {
@@ -621,7 +429,15 @@ const TYPES = {
       "택배 오면 '이게 뭐였지?' 싶을 때 있음",
       "SNS 보다가 어느새 결제 완료돼 있음"
     ],
-    okn: "그 순간 못 사면 놓쳐요. 당신을 위한 알림이 있어요.\n<strong>한정 타임딜 공구</strong>, 알림 먼저 받아보세요.",
+    diag: {
+      metrics: [
+        { label: '자극 반응성', filled: 8 },
+        { label: '충동성',    filled: 8 },
+        { label: '계획성',    filled: 2 },
+        { label: '손실 회피', filled: 8 },
+      ],
+      text: "시각 자극 → 결제까지의 시간이 매우 짧습니다.\n구매 후 기억 지속성이 낮아 중복 구매가 발생하며,\nFOMO(놓칠까봐 두려움) 반응이 강해\n마감·한정 자극에 즉각적으로 반응합니다."
+    },
     tags: "#번개쇼퍼 #즉흥결제 #나의쇼핑DNA"
   },
   E: {
@@ -634,7 +450,15 @@ const TYPES = {
       "주변 추천 상품은 꼭 기억해뒀다가 삼",
       "좋은 거 발견하면 참지 못하고 바로 공유함"
     ],
-    okn: "검증된 게 좋은 거 맞아요.\n<strong>참여율 높은 인기 공구</strong>, 믿고 참여해도 돼요.",
+    diag: {
+      metrics: [
+        { label: '사회적 증거', filled: 8 },
+        { label: '리스크 회피', filled: 8 },
+        { label: '정보 탐색',  filled: 8 },
+        { label: '충동성',    filled: 4 },
+      ],
+      text: "타인의 경험을 자신의 판단 기준으로 활용합니다.\n리뷰 수가 많을수록 신뢰도가 상승하며,\n구매 후 주변에 공유해 집단 검증 사이클을\n스스로 만드는 소셜 중심 소비 패턴입니다."
+    },
     tags: "#별점감별사 #소셜쇼퍼 #나의쇼핑DNA"
   },
   F: {
@@ -647,20 +471,28 @@ const TYPES = {
       "쇼핑 자체가 취미, 발굴하는 과정이 즐거움",
       "품절되면 비슷한 다른 거 찾는 게 또 재밌음"
     ],
-    okn: "신규 브랜드를 가장 먼저 만나는 사람이 있어야죠.\n<strong>얼리버드 공구</strong>, 당신을 위해 준비했어요.",
+    diag: {
+      metrics: [
+        { label: '탐색 욕구',   filled: 8 },
+        { label: '새로움 선호', filled: 8 },
+        { label: '브랜드 충성', filled: 2 },
+        { label: '계획성',     filled: 4 },
+      ],
+      text: "발굴 자체가 목적인 탐험형 소비자입니다.\n품절·단종도 새로운 발견의 계기로 전환하며,\n트렌드 선도 성향이 강해 주변의\n얼리어답터 역할을 자연스럽게 수행합니다."
+    },
     tags: "#신상사냥꾼 #탐험쇼퍼 #나의쇼핑DNA"
   }
 };
 
 /* ── 앱 상태 ──────────────────────────────────────────── */
-const TOTAL_Q  = 9;
-let step       = -1;
+const TOTAL_Q   = 8;
+let step        = -1;
 let quizStartTime = null;
-let answers    = [];
+let answers     = [];
 let myResultKey = null;
-let hasSaved   = false;
+let hasSaved    = false;
 
-/* ── Firebase 초기화 ──────────────────────────────────── */
+/* ── Firebase ─────────────────────────────────────────── */
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyCtGNMXqjk45k0CkQI9Q4PDMkHt5tB_iyI",
   authDomain: "gpdna-cbf7b.firebaseapp.com",
@@ -669,44 +501,18 @@ const FIREBASE_CONFIG = {
   messagingSenderId: "351903573550",
   appId: "1:351903573550:web:d4d6970f965c00083021bf"
 };
-
 let db = null;
 
 async function initFirebase() {
   if (db) return;
   try {
     let attempts = 0;
-    while (!window.firebase && attempts < 50) {
-      await new Promise(r => setTimeout(r, 100));
-      attempts++;
-    }
-    if (window.firebase && window.firebase.apps.length === 0) {
-      firebase.initializeApp(FIREBASE_CONFIG);
-      db = firebase.firestore();
-    } else if (window.firebase && window.firebase.apps.length > 0) {
-      db = firebase.firestore();
-    }
-  } catch (e) {
-    console.error('Firebase init failed:', e);
-  }
+    while (!window.firebase && attempts < 50) { await new Promise(r => setTimeout(r, 100)); attempts++; }
+    if (window.firebase && window.firebase.apps.length === 0) { firebase.initializeApp(FIREBASE_CONFIG); db = firebase.firestore(); }
+    else if (window.firebase && window.firebase.apps.length > 0) { db = firebase.firestore(); }
+  } catch(e) { console.error('Firebase init:', e); }
 }
 
-/* ── 유틸 ─────────────────────────────────────────────── */
-function nl2br(s) {
-  return String(s)
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/\n/g, '<br>');
-}
-
-function calcResult() {
-  const sc = { A:0, B:0, C:0, D:0, E:0, F:0 };
-  answers.forEach((a, i) => {
-    sc[SCORE_MAP[i][a]]++;
-  });
-  return Object.entries(sc).sort((a,b) => b[1]-a[1])[0][0];
-}
-
-/* ── Firebase 저장 ────────────────────────────────────── */
 async function saveToFirebase(typeKey) {
   if (!db) return;
   try {
@@ -716,43 +522,66 @@ async function saveToFirebase(typeKey) {
     const deviceType = isMobile ? 'mobile' : isTablet ? 'tablet' : 'desktop';
     const referrer = document.referrer || 'direct';
     const isKakao  = /KAKAO/i.test(ua);
-    const source   = isKakao ? 'kakao'
-                   : referrer.includes('instagram') ? 'instagram'
-                   : referrer === 'direct' ? 'direct' : 'other';
-    const data = {
-      type: typeKey,
-      answers: answers,
+    const source   = isKakao ? 'kakao' : referrer.includes('instagram') ? 'instagram' : referrer === 'direct' ? 'direct' : 'other';
+    await db.collection('shopping_results').add({
+      type: typeKey, answers,
       timestamp: new Date().toISOString(),
       durationSec: quizStartTime ? Math.round((Date.now() - quizStartTime) / 1000) : null,
-      deviceType, screenWidth: window.innerWidth,
-      source, referrer: referrer.substring(0, 100),
+      deviceType, screenWidth: window.innerWidth, source,
+      referrer: referrer.substring(0, 100),
       lang: navigator.language || 'unknown',
       userAgent: ua.substring(0, 150)
-    };
-    const result = await db.collection('shopping_results').add(data);
-    console.log('Saved:', result.id);
-  } catch (e) {
-    console.error('Firebase save error:', e);
-  }
+    });
+  } catch(e) { console.error('Save error:', e); }
+}
+
+/* ── 유틸 ─────────────────────────────────────────────── */
+function nl2br(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+}
+
+function calcResult() {
+  const sc = { A:0, B:0, C:0, D:0, E:0, F:0 };
+  answers.forEach((a, i) => { sc[SCORE_MAP[i][a]]++; });
+  return Object.entries(sc).sort((a,b) => b[1]-a[1])[0][0];
+}
+
+function buildDiagBox(key) {
+  const t = TYPES[key];
+  const rows = t.diag.metrics.map(m => diagRow(m.label, m.filled)).join('');
+  return `
+    <div class="diag-box">
+      <div class="diag-title">📊 소비 행동 분석</div>
+      <div class="diag-metrics">${rows}</div>
+      <div class="diag-divider"></div>
+      <p class="diag-text">${nl2br(t.diag.text)}</p>
+    </div>
+  `;
+}
+
+function buildTraits(key) {
+  return TYPES[key].traits.map(tr =>
+    `<li class="result-trait"><div class="trait-dot"></div><span>${nl2br(tr)}</span></li>`
+  ).join('');
 }
 
 /* ── 렌더 ─────────────────────────────────────────────── */
 const $app = document.getElementById('app');
 
 async function render() {
-  if (step === -1)           renderIntro();
-  else if (step < TOTAL_Q)   renderQ();
-  else                       await renderResult();
+  if (step === -1)          renderIntro();
+  else if (step < TOTAL_Q)  renderQ();
+  else                      await renderResult();
 }
 
 function renderIntro() {
   $app.innerHTML = `
     <div class="view intro">
-      <div class="intro-badge">🛍️ 나의 쇼핑 DNA</div>
+      <div class="intro-badge">🔬 소비 심리 진단</div>
       <h1 class="intro-title">쇼핑할 때<br>나는 어떤<br><em>사람</em>일까?</h1>
-      <p class="intro-desc">9개 질문으로 알아보는<br>나만의 쇼핑 심리 유형</p>
+      <p class="intro-desc">8가지 실제 상황 기반<br>소비 행동 패턴 분석</p>
       <button class="btn-start" onclick="goStart()">지금 바로 →</button>
-      <p class="intro-note">9개 질문 · 1분이면 완료</p>
+      <p class="intro-note">8개 질문 · 1분이면 완료</p>
     </div>
   `;
 }
@@ -760,12 +589,10 @@ function renderIntro() {
 function renderQ() {
   const q   = QS[step];
   const pct = (step / TOTAL_Q) * 100;
-
   const bars = Array.from({ length: TOTAL_Q }, (_, i) => {
     const cls = i < step ? 'done' : i === step ? 'curr' : '';
     return `<div class="step-bar ${cls}"></div>`;
   }).join('');
-
   const opts = q.opts.map((o, i) =>
     `<button class="opt" onclick="pick(${i})">${nl2br(o)}</button>`
   ).join('');
@@ -787,8 +614,8 @@ function renderAnalyzing() {
     <div class="prog-wrap"><div class="prog-fill" style="width:100%"></div></div>
     <div class="view analyzing">
       <div class="analyzing-icon">🔬</div>
-      <h2>쇼핑 DNA 분석 중...</h2>
-      <p>9개 답변을 살펴보고 있어요</p>
+      <h2>소비 행동 분석 중...</h2>
+      <p>8개 패턴을 살펴보고 있어요</p>
     </div>
   `;
 }
@@ -798,33 +625,25 @@ async function renderResult() {
   const key = myResultKey;
   const t   = TYPES[key];
 
-  const traits = t.traits.map(tr =>
-    `<li class="result-trait">
-       <div class="trait-dot"></div>
-       <span>${nl2br(tr)}</span>
-     </li>`
-  ).join('');
-
   $app.innerHTML = `
     <div class="prog-wrap"><div class="prog-fill" style="width:100%"></div></div>
     <div class="view result-view anim-fade">
       <div class="result-header">
         <div class="result-emoji"><img src="img/type-${key}.png" alt="${t.name}"></div>
-        <div class="result-pill">나의 쇼핑 DNA</div>
+        <div class="result-pill">소비 심리 진단 결과</div>
         <h2 class="result-name">${nl2br(t.name)}</h2>
         <p class="result-tagline">${nl2br(t.tagline)}</p>
       </div>
 
       <div class="result-quote">${nl2br(t.quote)}</div>
 
-      <ul class="result-traits">${traits}</ul>
+      <ul class="result-traits">${buildTraits(key)}</ul>
 
-      <div class="result-okn">${t.okn.replace(/\n/g,'<br>')}</div>
+      ${buildDiagBox(key)}
 
       <div class="result-ctas">
         <button class="btn btn-primary" onclick="doShare('${key}')">결과 공유하기</button>
         <button class="btn btn-secondary" onclick="renderAllTypes()">모든 유형 보러가기</button>
-        <button class="btn btn-secondary" onclick="doShop()">맞는 공구 보러가기</button>
       </div>
 
       <p class="hashtags">${nl2br(t.tags)}</p>
@@ -844,15 +663,15 @@ function renderAllTypes() {
     const t = TYPES[key];
     const isMine = key === myResultKey;
     return `
-      <div class="type-card ${isMine ? 'mine' : ''}">
-        <div class="type-card-img">
-          <img src="img/type-${key}.png" alt="${t.name}">
-        </div>
+      <div class="type-card ${isMine ? 'mine' : ''}" onclick="renderTypeDetail('${key}')">
+        <div class="type-card-img"><img src="img/type-${key}.png" alt="${t.name}"></div>
         <div class="type-card-info">
           <div class="type-card-name">${t.name}</div>
           <div class="type-card-tagline">${t.tagline}</div>
         </div>
-        ${isMine ? '<span class="type-mine-badge">나의 유형</span>' : ''}
+        ${isMine
+          ? '<span class="type-mine-badge">나의 유형</span>'
+          : '<span class="type-card-arrow">›</span>'}
       </div>
     `;
   }).join('');
@@ -869,12 +688,39 @@ function renderAllTypes() {
   `;
 }
 
+function renderTypeDetail(key) {
+  const t      = TYPES[key];
+  const isMine = key === myResultKey;
+
+  $app.innerHTML = `
+    <div class="prog-wrap"><div class="prog-fill" style="width:100%"></div></div>
+    <div class="view result-view anim-fade">
+      <div class="detail-header">
+        <button class="back-btn" onclick="renderAllTypes()">← 전체 유형</button>
+        ${isMine ? '<span class="type-mine-badge">나의 유형</span>' : ''}
+      </div>
+
+      <div class="result-header">
+        <div class="result-emoji"><img src="img/type-${key}.png" alt="${t.name}"></div>
+        <div class="result-pill">소비 심리 유형</div>
+        <h2 class="result-name">${nl2br(t.name)}</h2>
+        <p class="result-tagline">${nl2br(t.tagline)}</p>
+      </div>
+
+      <div class="result-quote">${nl2br(t.quote)}</div>
+
+      <ul class="result-traits">${buildTraits(key)}</ul>
+
+      ${buildDiagBox(key)}
+
+      <button class="btn btn-secondary" onclick="renderAllTypes()">← 전체 유형으로</button>
+    </div>
+  `;
+}
+
 /* ── 액션 ─────────────────────────────────────────────── */
 function goStart() {
-  step = 0;
-  answers = [];
-  myResultKey = null;
-  hasSaved = false;
+  step = 0; answers = []; myResultKey = null; hasSaved = false;
   quizStartTime = Date.now();
   render();
 }
@@ -887,10 +733,7 @@ function pick(idx) {
   answers.push(idx);
 
   if (step === TOTAL_Q - 1) {
-    setTimeout(() => {
-      renderAnalyzing();
-      setTimeout(() => { step = TOTAL_Q; render(); }, 1400);
-    }, 360);
+    setTimeout(() => { renderAnalyzing(); setTimeout(() => { step = TOTAL_Q; render(); }, 1400); }, 360);
   } else {
     setTimeout(() => { step++; render(); }, 350);
   }
@@ -902,14 +745,8 @@ function doShare(key) {
   if (navigator.share) {
     navigator.share({ title: '나의 쇼핑 DNA', text, url: location.href }).catch(() => {});
   } else {
-    navigator.clipboard?.writeText(text)
-      .then(() => alert('결과가 복사됐어요!'))
-      .catch(() => alert(text));
+    navigator.clipboard?.writeText(text).then(() => alert('결과가 복사됐어요!')).catch(() => alert(text));
   }
-}
-
-function doShop() {
-  alert('맞는 공구 리스트로 이동해요.');
 }
 
 /* ── 시작 ─────────────────────────────────────────────── */
