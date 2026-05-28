@@ -531,6 +531,7 @@ const TYPES = {
 
 /* ── 앱 상태 ──────────────────────────────────────────── */
 let step    = -1;
+let quizStartTime = null;
 let answers = [];
 
 /* ── Firebase 초기화 ──────────────────────────────────── */
@@ -595,11 +596,33 @@ async function saveToFirebase(typeKey) {
   }
 
   try {
+    // 디바이스 타입 판별
+    const ua = navigator.userAgent;
+    const isMobile = /iPhone|Android.*Mobile|BlackBerry|IEMobile/.test(ua);
+    const isTablet = /iPad|Android(?!.*Mobile)/.test(ua);
+    const deviceType = isMobile ? 'mobile' : isTablet ? 'tablet' : 'desktop';
+
+    // 유입 경로 파싱
+    const referrer = document.referrer || 'direct';
+    const isKakao  = /KAKAO/i.test(ua);
+    const source   = isKakao ? 'kakao' : referrer.includes('instagram') ? 'instagram' : referrer === 'direct' ? 'direct' : 'other';
+
     const data = {
       type: typeKey,
       answers: answers,
       timestamp: new Date().toISOString(),
-      userAgent: navigator.userAgent.substring(0, 100)
+      // 소요 시간
+      durationSec: quizStartTime ? Math.round((Date.now() - quizStartTime) / 1000) : null,
+      // 디바이스
+      deviceType: deviceType,
+      screenWidth: window.innerWidth,
+      // 유입
+      source: source,
+      referrer: referrer.substring(0, 100),
+      // 언어
+      lang: navigator.language || 'unknown',
+      // 브라우저
+      userAgent: ua.substring(0, 150)
     };
 
     const result = await db.collection('quiz_results').add(data);
@@ -712,6 +735,7 @@ async function renderResult() {
 function goStart() {
   step = 0;
   answers = [];
+  quizStartTime = Date.now(); // 퀴즈 시작 시각 기록
   render();
 }
 
