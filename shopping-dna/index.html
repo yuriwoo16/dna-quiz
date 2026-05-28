@@ -90,15 +90,18 @@
     .step-bar.done { background: var(--red); opacity: .45; }
     .step-bar.curr { background: var(--red); }
 
-    .q-scene { font-size: 13px; color: var(--light); margin-bottom: 10px; flex-shrink: 0; }
+    .q-scene { font-size: 15px; font-weight: 600; color: var(--mid); flex-shrink: 0; }
     .q-num {
       font-size: 13px; font-weight: 700; color: var(--red);
       letter-spacing: .5px; margin-bottom: 14px; flex-shrink: 0;
     }
+    .q-body {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center; gap: 8px;
+    }
     .q-text {
-      font-size: 26px; font-weight: 700; line-height: 1.45;
-      color: var(--dark); word-break: keep-all; flex: 1;
-      display: flex; align-items: center;
+      font-size: 30px; font-weight: 700; line-height: 1.45;
+      color: var(--dark); word-break: keep-all;
     }
     .opts {
       flex-shrink: 0; padding: 20px 0;
@@ -213,6 +216,14 @@
       font-size: 14px; color: var(--red-soft); text-align: center;
       line-height: 1.8; word-break: break-word;
     }
+    .btn-text {
+      background: none; border: none; font-family: inherit;
+      font-size: 15px; color: var(--light); cursor: pointer;
+      padding: 10px 0; text-align: center;
+      text-decoration: underline; text-underline-offset: 3px;
+      transition: color .15s;
+    }
+    .btn-text:active { color: var(--mid); }
 
     /* ── 모든 유형 보기 ─────────────────── */
     .all-types-view { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; display: flex; flex-direction: column; }
@@ -601,9 +612,11 @@ function renderQ() {
     <div class="prog-wrap"><div class="prog-fill" style="width:${pct}%"></div></div>
     <div class="view qview anim-slide">
       <div class="step-bars">${bars}</div>
-      ${q.scene ? `<div class="q-scene">${q.scene}</div>` : ''}
       <div class="q-num">Q${step + 1} / ${TOTAL_Q}</div>
-      <div class="q-text">${nl2br(q.text)}</div>
+      <div class="q-body">
+        ${q.scene ? `<div class="q-scene">${q.scene}</div>` : ''}
+        <div class="q-text">${nl2br(q.text)}</div>
+      </div>
       <div class="opts">${opts}</div>
     </div>
   `;
@@ -647,6 +660,7 @@ async function renderResult() {
       </div>
 
       <p class="hashtags">${nl2br(t.tags)}</p>
+      <button class="btn-text" onclick="goRestart()">처음부터 다시 하기</button>
     </div>
   `;
 
@@ -737,6 +751,11 @@ function pick(idx) {
   } else {
     setTimeout(() => { step++; render(); }, 350);
   }
+}
+
+function goRestart() {
+  step = -1; answers = []; myResultKey = null; hasSaved = false; quizStartTime = null;
+  render();
 }
 
 function doShare(key) {
