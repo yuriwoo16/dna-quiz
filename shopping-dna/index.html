@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#FE0955">
   <title>나의 쇼핑 DNA</title>
+
+  <meta property="og:title" content="혹시 나만 이렇게 쇼핑해?">
+  <meta property="og:description" content="당신의 쇼핑 본능을 파헤쳐 보세요. 10문항으로 알아보는 내 쇼핑 유형">
+  <meta property="og:image" content="https://yuriwoo16.github.io/dna-quiz/shopping-dna/img/og-image.png">
+  <meta property="og:url" content="https://yuriwoo16.github.io/dna-quiz/shopping-dna/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
   <style>
     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.css');
 
@@ -15,14 +23,14 @@
     }
 
     :root {
-      --red:        #FE0955;
-      --red-soft:   #FF6694;
-      --red-bg:     #FFF0F4;
-      --dark:       #17192A;
-      --mid:        #6B7080;
-      --light:      #B0B5C5;
-      --border:     #E8EAF0;
-      --surface:    #F6F7FA;
+      --red:      #FE0955;
+      --red-soft: #FF6694;
+      --red-bg:   #FFF0F4;
+      --dark:     #17192A;
+      --mid:      #6B7080;
+      --light:    #B0B5C5;
+      --border:   #E8EAF0;
+      --surface:  #F6F7FA;
     }
 
     html, body {
@@ -43,9 +51,6 @@
       overflow: hidden;
     }
 
-    .prog-wrap { flex-shrink: 0; height: 3px; background: var(--border); }
-    .prog-fill  { height: 100%; background: var(--red); transition: width 0.4s cubic-bezier(.4,0,.2,1); }
-
     .view { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
     /* 인트로 */
@@ -54,15 +59,9 @@
       padding: 40px 32px;
       padding-bottom: calc(40px + env(safe-area-inset-bottom));
     }
-    .intro-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 14px; font-weight: 700; color: var(--red);
-      background: var(--red-bg); padding: 6px 16px;
-      border-radius: 100px; margin-bottom: 28px;
-    }
     .intro-title {
-      font-size: 34px; font-weight: 800; line-height: 1.35;
-      color: var(--dark); margin-bottom: 14px; word-break: keep-all;
+      font-size: 38px; font-weight: 800; line-height: 1.25;
+      color: var(--dark); margin-bottom: 18px; word-break: keep-all;
     }
     .intro-title em { color: var(--red); font-style: normal; }
     .intro-desc {
@@ -73,10 +72,11 @@
       display: block; width: 100%; padding: 19px;
       background: var(--red); color: #fff; border: none;
       border-radius: 100px; font-family: inherit; font-size: 18px;
-      font-weight: 700; cursor: pointer; margin-bottom: 14px; transition: opacity .15s;
+      font-weight: 700; cursor: pointer; margin-bottom: 16px; transition: opacity .15s;
     }
     .btn-start:active { opacity: .85; }
-    .intro-note { font-size: 14px; color: var(--light); }
+    .intro-note { font-size: 15px; color: var(--light); }
+    .intro-count { color: var(--red); font-weight: 800; font-size: 17px; }
 
     /* 문항 화면 */
     .qview { padding: 20px 24px; flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
@@ -127,6 +127,11 @@
       padding-bottom: calc(32px + env(safe-area-inset-bottom));
       display: flex; flex-direction: column; gap: 20px;
     }
+    .shared-banner {
+      background: var(--surface); border-radius: 12px;
+      padding: 12px 16px; font-size: 14px; color: var(--mid);
+      text-align: center; flex-shrink: 0;
+    }
     .detail-header {
       display: flex; align-items: center; justify-content: space-between;
       flex-shrink: 0;
@@ -137,20 +142,23 @@
     }
     .result-header {
       display: flex; flex-direction: column; align-items: center;
-      text-align: center; gap: 12px;
+      text-align: center; gap: 10px;
     }
     .result-emoji {
       width: 132px; height: 132px; display: flex;
       align-items: center; justify-content: center;
       font-size: 64px; margin-bottom: 4px; overflow: hidden;
     }
-    .result-emoji img { width: 100%; height: 100%; object-fit: contain; }
-    .result-pill {
+    .pct-badge {
       font-size: 13px; font-weight: 700; color: var(--red);
       background: var(--red-bg); padding: 5px 16px; border-radius: 100px;
+      display: inline-flex; align-items: center; gap: 4px;
     }
     .result-name { font-size: 32px; font-weight: 800; color: var(--dark); line-height: 1.2; }
-    .result-tagline { font-size: 16px; color: var(--mid); word-break: keep-all; }
+    .result-tagline {
+      font-size: 18px; font-weight: 700; color: var(--dark);
+      word-break: keep-all; line-height: 1.4;
+    }
 
     .result-quote {
       background: var(--surface); border-radius: 16px; padding: 22px;
@@ -193,6 +201,38 @@
       font-size: 14px; color: #5A2035; line-height: 1.75;
       word-break: keep-all;
     }
+
+    /* OK캐쉬백 섹션 */
+    .okcp-section {
+      border: 1.5px solid var(--border); border-radius: 16px;
+      padding: 18px 0 18px 18px; flex-shrink: 0;
+    }
+    .okcp-title {
+      font-size: 14px; font-weight: 700; color: var(--dark);
+      margin-bottom: 14px; padding-right: 18px; line-height: 1.45; word-break: keep-all;
+    }
+    .okcp-scroll {
+      display: flex; gap: 12px;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; padding-right: 18px; padding-bottom: 4px;
+    }
+    .okcp-scroll::-webkit-scrollbar { display: none; }
+    .okcp-card { flex-shrink: 0; width: 116px; }
+    .okcp-img {
+      width: 116px; height: 116px; border-radius: 12px;
+      margin-bottom: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800; color: rgba(255,255,255,0.92);
+      letter-spacing: 1px;
+    }
+    .okcp-brand { font-size: 11px; color: var(--mid); margin-bottom: 3px; }
+    .okcp-name {
+      font-size: 12px; font-weight: 500; color: var(--dark);
+      line-height: 1.4; margin-bottom: 5px; word-break: keep-all;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .okcp-price { font-size: 13px; font-weight: 700; color: var(--dark); }
+    .okcp-discount { color: var(--red); margin-right: 2px; }
 
     .result-ctas { display: flex; flex-direction: column; gap: 10px; }
     .btn {
@@ -237,8 +277,10 @@
     }
     .type-card:active { background: var(--surface); }
     .type-card.mine { border-color: var(--red); background: var(--red-bg); }
-    .type-card-img { width: 60px; height: 60px; flex-shrink: 0; }
-    .type-card-img img { width: 100%; height: 100%; object-fit: contain; }
+    .type-card-img {
+      width: 60px; height: 60px; flex-shrink: 0;
+      font-size: 36px; display: flex; align-items: center; justify-content: center;
+    }
     .type-card-info { flex: 1; }
     .type-card-name { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
     .type-card-tagline { font-size: 14px; color: var(--mid); }
@@ -274,34 +316,23 @@ const QS = [
 ];
 
 const SCORE_MAP = [
-  ['F', 'A'],  // Q1
-  ['D', 'C'],  // Q2
-  ['A', 'F'],  // Q3
-  ['E', 'C'],  // Q4
-  ['C', 'E'],  // Q5
-  ['B', 'D'],  // Q6
-  ['E', 'B'],  // Q7
-  ['A', 'B'],  // Q8
-  ['F', 'E'],  // Q9
-  ['C', 'D']   // Q10
+  ['F', 'A'],
+  ['D', 'C'],
+  ['A', 'F'],
+  ['E', 'C'],
+  ['C', 'E'],
+  ['B', 'D'],
+  ['E', 'B'],
+  ['A', 'B'],
+  ['F', 'E'],
+  ['C', 'D']
 ];
-
-function diagRow(label, filled) {
-  const level    = filled >= 6 ? '높음' : filled >= 4 ? '중간' : '낮음';
-  const cls      = filled >= 6 ? 'high' : filled >= 4 ? 'mid'  : 'low';
-  const on       = '<span class="dot-on">'  + '●'.repeat(filled)     + '</span>';
-  const off      = '<span class="dot-off">' + '●'.repeat(8 - filled) + '</span>';
-  return `<div class="diag-row">
-    <span class="diag-label">${label}</span>
-    <span class="diag-bar">${on}${off}</span>
-    <span class="diag-level ${cls}">${level}</span>
-  </div>`;
-}
 
 const TYPES = {
   A: {
     emoji: "🍷",
     name: "장바구니 숙성 장인",
+    pct: 23,
     tagline: "와인처럼 담가두고 할인을 기다림",
     quote: "\"할인이 구매의 허락증이에요.\n쿠폰 뜨면 0.3초 안에 결제합니다.\"",
     traits: [
@@ -314,7 +345,7 @@ const TYPES = {
         { label: '할인 민감도', filled: 8 },
         { label: '기다림의 미학', filled: 8 },
         { label: '충동성', filled: 4 },
-        { label: '계획성', filled: 6 },
+        { label: '계획성', filled: 6 }
       ],
       text: "인내의 화신인 척하지만, 쿠폰 알림이 뜨면\n즉시 폭발합니다. 담아둔 장바구니는\n할인을 기다리는 와인처럼 숙성 중입니다."
     },
@@ -323,6 +354,7 @@ const TYPES = {
   B: {
     emoji: "🧮",
     name: "3천원 아끼려다 만원 쓰는 회계사",
+    pct: 18,
     tagline: "절약 전문가인 척, 계산은 늘 손해",
     quote: "\"배송비 3천원은 말도 안 되죠.\n차라리 뭐 하나 더 사는 게 낫지 않나요?\"",
     traits: [
@@ -335,7 +367,7 @@ const TYPES = {
         { label: '배송비 알레르기', filled: 8 },
         { label: '무배 집착도', filled: 8 },
         { label: '가격 민감도', filled: 7 },
-        { label: '자제력', filled: 2 },
+        { label: '자제력', filled: 2 }
       ],
       text: "배송비 아끼려고 실제로는 더 큰 금액을 씁니다.\n절약 계산기처럼 보이지만, 결과는 언제나\n손실입니다. 배송비가 보이는 순간 본능이 깨어납니다."
     },
@@ -344,6 +376,7 @@ const TYPES = {
   C: {
     emoji: "🔍",
     name: "리뷰 셜록",
+    pct: 31,
     tagline: "추리는 화려한데 판결은 늘 '구매'",
     quote: "\"리뷰를 다 읽은 뒤에 결정합니다.\n하지만 결론은 항상 같아요.\"",
     traits: [
@@ -356,7 +389,7 @@ const TYPES = {
         { label: '리뷰 의존도', filled: 8 },
         { label: '확증편향', filled: 8 },
         { label: '의심심', filled: 7 },
-        { label: '결정력', filled: 8 },
+        { label: '결정력', filled: 8 }
       ],
       text: "탐정처럼 리뷰를 파고들지만, 판결은\n이미 정해져 있습니다. 리뷰는 이미 사기로\n결정한 마음에 도장을 찍는 절차일 뿐입니다."
     },
@@ -365,6 +398,7 @@ const TYPES = {
   D: {
     emoji: "🖼️",
     name: "찜목록 큐레이터",
+    pct: 15,
     tagline: "욕망을 전시만, 소장은 안 함",
     quote: "\"찜해두면 마음이 놓여요.\n꼭 사야 한다는 압박이 없잖아요.\"",
     traits: [
@@ -377,7 +411,7 @@ const TYPES = {
         { label: '찜 수집욕', filled: 8 },
         { label: '구매 미루기', filled: 8 },
         { label: '신중성', filled: 6 },
-        { label: '구매력', filled: 2 },
+        { label: '구매력', filled: 2 }
       ],
       text: "미술관 큐레이터처럼 욕망을 전시합니다.\n찜하는 순간 이미 소유한 것 같은 만족감으로\n실제 구매는 미루기만 반복합니다."
     },
@@ -386,6 +420,7 @@ const TYPES = {
   E: {
     emoji: "💘",
     name: "돌고 돌아 첫사랑",
+    pct: 27,
     tagline: "비교 2시간, 결국 처음 봤던 그 애",
     quote: "\"꼼꼼하게 비교해 봤는데...\n어차피 처음 것이 최고네요.\"",
     traits: [
@@ -398,7 +433,7 @@ const TYPES = {
         { label: '비교 본능', filled: 8 },
         { label: '첫인상 신뢰도', filled: 8 },
         { label: '분석력', filled: 6 },
-        { label: '결정력', filled: 7 },
+        { label: '결정력', filled: 7 }
       ],
       text: "분석가처럼 보이지만, 심장은\n첫사랑을 잊지 못합니다. 비교는\n첫 선택을 정당화하는 아름다운 알리바이입니다."
     },
@@ -407,6 +442,7 @@ const TYPES = {
   F: {
     emoji: "☁️",
     name: "부처님 손바닥 위 손오공",
+    pct: 12,
     tagline: "알고리즘 벗어난 줄 알았지?",
     quote: "\"추천 피드는 꽤 유용해요.\n아, 또 스크롤했다.\"",
     traits: [
@@ -419,7 +455,7 @@ const TYPES = {
         { label: '알고리즘 의존도', filled: 8 },
         { label: '도파민 반응성', filled: 8 },
         { label: '주체성', filled: 2 },
-        { label: '발견형 쇼핑', filled: 8 },
+        { label: '발견형 쇼핑', filled: 8 }
       ],
       text: "부처님 손바닥 위의 손오공처럼, 벗어난 줄\n알지만 이미 손바닥 안입니다.\n클릭할 때마다 알고리즘을 훈련시키는 공범입니다."
     },
@@ -427,12 +463,22 @@ const TYPES = {
   }
 };
 
+const OKCP_PRODUCTS = [
+  { brand: '스타벅스',    name: '카페 아메리카노 T+탕종 파마산 치즈 베이글', discount: 30, price: '12,400원', color: '#1E3932', abbr: 'SB' },
+  { brand: '배스킨라빈스', name: '패밀리 아이스크림',                        discount: 2,  price: '25,540원', color: '#E6007E', abbr: 'BR' },
+  { brand: '스타벅스',    name: '아이스 카페 라떼 T',                        discount: 0,  price: '5,200원',  color: '#1E3932', abbr: 'SB' },
+  { brand: '스타벅스',    name: '딸기 딜라이트 요거트 블렌디드',              discount: 0,  price: '6,400원',  color: '#1E3932', abbr: 'SB' },
+  { brand: 'GS25',        name: '모바일 금액권 5,000원',                     discount: 5,  price: '4,500원',  color: '#0046A3', abbr: 'GS' },
+  { brand: '피자헛',      name: '(오리지널)페페로니 러버 L+콜라 1.25L',      discount: 30, price: '27,800원', color: '#D62300', abbr: 'PH' }
+];
+
 const TOTAL_Q = 10;
 let step = -1;
 let quizStartTime = null;
 let answers = [];
 let myResultKey = null;
 let hasSaved = false;
+let isSharedView = false;
 
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyCtGNMXqjk45k0CkQI9Q4PDMkHt5tB_iyI",
@@ -486,6 +532,18 @@ function calcResult() {
   return Object.entries(sc).sort((a,b) => b[1]-a[1])[0][0];
 }
 
+function diagRow(label, filled) {
+  const level = filled >= 6 ? '높음' : filled >= 4 ? '중간' : '낮음';
+  const cls   = filled >= 6 ? 'high' : filled >= 4 ? 'mid'  : 'low';
+  const on    = '<span class="dot-on">'  + '●'.repeat(filled)     + '</span>';
+  const off   = '<span class="dot-off">' + '●'.repeat(8 - filled) + '</span>';
+  return `<div class="diag-row">
+    <span class="diag-label">${label}</span>
+    <span class="diag-bar">${on}${off}</span>
+    <span class="diag-level ${cls}">${level}</span>
+  </div>`;
+}
+
 function buildDiagBox(key) {
   const t = TYPES[key];
   const rows = t.diag.metrics.map(m => diagRow(m.label, m.filled)).join('');
@@ -505,36 +563,52 @@ function buildTraits(key) {
   ).join('');
 }
 
+function buildOkcpSection(typeKey) {
+  const t = TYPES[typeKey];
+  const cards = OKCP_PRODUCTS.map(p => {
+    const disc = p.discount > 0 ? `<span class="okcp-discount">${p.discount}%</span> ` : '';
+    return `
+      <div class="okcp-card">
+        <div class="okcp-img" style="background:${p.color}">${p.abbr}</div>
+        <div class="okcp-brand">${p.brand}</div>
+        <div class="okcp-name">${p.name}</div>
+        <div class="okcp-price">${disc}${p.price}</div>
+      </div>`;
+  }).join('');
+  return `
+    <div class="okcp-section">
+      <div class="okcp-title">${t.emoji} ${t.name} 유형이 좋아할만한 OK캐쉬백 상품</div>
+      <div class="okcp-scroll">${cards}</div>
+    </div>`;
+}
+
 const $app = document.getElementById('app');
 
 async function render() {
-  if (step === -1)          renderIntro();
-  else if (step < TOTAL_Q)  renderQ();
-  else                      await renderResult();
+  if (step === -1)         renderIntro();
+  else if (step < TOTAL_Q) renderQ();
+  else                     await renderResult();
 }
 
 function renderIntro() {
   $app.innerHTML = `
     <div class="view intro">
-      <div class="intro-badge">🛍️ 쇼핑 심리 진단</div>
-      <h1 class="intro-title">나는<br>어떤 쇼퍼<br><em>유형</em>일까?</h1>
-      <p class="intro-desc">쇼핑할 때 나타나는 숨은 심리<br>10가지 실제 행동으로 진단</p>
-      <button class="btn-start" onclick="goStart()">지금 시작 →</button>
-      <p class="intro-note">10개 질문 · 1분이면 완료</p>
+      <h1 class="intro-title">혹시 나만<br>이렇게<br><em>쇼핑해?</em></h1>
+      <p class="intro-desc">당신의 쇼핑 본능을 파헤쳐 보세요.</p>
+      <button class="btn-start" onclick="goStart()">내 유형 1분 진단 →</button>
+      <p class="intro-note"><strong class="intro-count">2,234명</strong>이 참여했어요</p>
     </div>
   `;
 }
 
 function renderQ() {
-  const q   = QS[step];
-  const pct = (step / TOTAL_Q) * 100;
+  const q    = QS[step];
   const bars = Array.from({ length: TOTAL_Q }, (_, i) => {
     const cls = i < step ? 'done' : i === step ? 'curr' : '';
     return `<div class="step-bar ${cls}"></div>`;
   }).join('');
 
   $app.innerHTML = `
-    <div class="prog-wrap"><div class="prog-fill" style="width:${pct}%"></div></div>
     <div class="view qview anim-slide">
       <div class="step-bars">${bars}</div>
       <div class="q-num">Q${step + 1} / ${TOTAL_Q}</div>
@@ -549,7 +623,6 @@ function renderQ() {
 
 function renderAnalyzing() {
   $app.innerHTML = `
-    <div class="prog-wrap"><div class="prog-fill" style="width:100%"></div></div>
     <div class="view analyzing">
       <div class="analyzing-icon">🔬</div>
       <h2>당신의 쇼핑 유형을 분석 중...</h2>
@@ -563,12 +636,26 @@ async function renderResult() {
   const key = myResultKey;
   const t   = TYPES[key];
 
+  const sharedBanner = isSharedView
+    ? `<div class="shared-banner">👆 친구가 공유한 결과예요</div>` : '';
+
+  const ctaButtons = isSharedView ? `
+    <button class="btn btn-primary"   onclick="goStart()">나도 해보기 →</button>
+    <button class="btn btn-secondary" onclick="doShare('${key}')">결과 공유하기</button>
+  ` : `
+    <button class="btn btn-primary"   onclick="doShare('${key}')">결과 공유하기</button>
+    <button class="btn btn-secondary" onclick="renderAllTypes()">모든 유형 보러가기</button>
+  `;
+
+  const restartBtn = isSharedView ? '' :
+    `<button class="btn-text" onclick="goRestart()">처음부터 다시 하기</button>`;
+
   $app.innerHTML = `
-    <div class="prog-wrap"><div class="prog-fill" style="width:100%"></div></div>
     <div class="view result-view anim-fade">
+      ${sharedBanner}
       <div class="result-header">
         <div class="result-emoji">${t.emoji}</div>
-        <div class="result-pill">당신의 쇼핑 유형</div>
+        <div class="pct-badge">🏆 상위 ${t.pct}%</div>
         <h2 class="result-name">${nl2br(t.name)}</h2>
         <p class="result-tagline">${nl2br(t.tagline)}</p>
       </div>
@@ -579,17 +666,16 @@ async function renderResult() {
 
       ${buildDiagBox(key)}
 
-      <div class="result-ctas">
-        <button class="btn btn-primary" onclick="doShare('${key}')">결과 공유하기</button>
-        <button class="btn btn-secondary" onclick="renderAllTypes()">모든 유형 보러가기</button>
-      </div>
+      ${buildOkcpSection(key)}
+
+      <div class="result-ctas">${ctaButtons}</div>
 
       <p class="hashtags">${nl2br(t.tags)}</p>
-      <button class="btn-text" onclick="goRestart()">처음부터 다시 하기</button>
+      ${restartBtn}
     </div>
   `;
 
-  if (!hasSaved) {
+  if (!hasSaved && !isSharedView) {
     hasSaved = true;
     await initFirebase();
     saveToFirebase(key).catch(e => console.error('Save failed:', e));
@@ -611,12 +697,10 @@ function renderAllTypes() {
         ${isMine
           ? '<span class="type-mine-badge">나의 유형</span>'
           : '<span class="type-card-arrow">›</span>'}
-      </div>
-    `;
+      </div>`;
   }).join('');
 
   $app.innerHTML = `
-    <div class="prog-wrap"><div class="prog-fill" style="width:100%"></div></div>
     <div class="view all-types-view anim-fade">
       <div class="all-types-header">
         <button class="back-btn" onclick="render()">← 내 결과로</button>
@@ -632,7 +716,6 @@ function renderTypeDetail(key) {
   const isMine = key === myResultKey;
 
   $app.innerHTML = `
-    <div class="prog-wrap"><div class="prog-fill" style="width:100%"></div></div>
     <div class="view result-view anim-fade">
       <div class="detail-header">
         <button class="back-btn" onclick="renderAllTypes()">← 전체 유형</button>
@@ -641,7 +724,7 @@ function renderTypeDetail(key) {
 
       <div class="result-header">
         <div class="result-emoji">${t.emoji}</div>
-        <div class="result-pill">쇼핑 유형</div>
+        <div class="pct-badge">🏆 상위 ${t.pct}%</div>
         <h2 class="result-name">${nl2br(t.name)}</h2>
         <p class="result-tagline">${nl2br(t.tagline)}</p>
       </div>
@@ -652,6 +735,8 @@ function renderTypeDetail(key) {
 
       ${buildDiagBox(key)}
 
+      ${buildOkcpSection(key)}
+
       <button class="btn btn-secondary" onclick="renderAllTypes()">← 전체 유형으로</button>
     </div>
   `;
@@ -659,12 +744,15 @@ function renderTypeDetail(key) {
 
 function goStart() {
   step = 0; answers = []; myResultKey = null; hasSaved = false;
-  quizStartTime = Date.now();
+  isSharedView = false; quizStartTime = Date.now();
+  history.replaceState({}, '', location.pathname);
   render();
 }
 
 function goRestart() {
-  step = -1; answers = []; myResultKey = null; hasSaved = false; quizStartTime = null;
+  step = -1; answers = []; myResultKey = null; hasSaved = false;
+  isSharedView = false; quizStartTime = null;
+  history.replaceState({}, '', location.pathname);
   render();
 }
 
@@ -682,17 +770,33 @@ function pick(idx) {
 }
 
 function doShare(key) {
-  const t    = TYPES[key];
-  const text = `나의 쇼핑 유형은 "${t.name}"이에요!\n${t.tagline}\n\n${t.tags}`;
+  const t        = TYPES[key];
+  const shareUrl = `${location.origin}${location.pathname}?type=${key}`;
+  const text     = `나의 쇼핑 유형은 "${t.name}"이에요!\n${t.tagline}\n\n${t.tags}`;
   if (navigator.share) {
-    navigator.share({ title: '나의 쇼핑 DNA', text, url: location.href }).catch(() => {});
+    navigator.share({ title: '나의 쇼핑 DNA', text, url: shareUrl }).catch(() => {});
   } else {
-    navigator.clipboard?.writeText(text).then(() => alert('결과가 복사됐어요!')).catch(() => alert(text));
+    navigator.clipboard?.writeText(shareUrl)
+      .then(() => alert('링크가 복사됐어요! 친구에게 공유해보세요 🔗'))
+      .catch(() => alert(shareUrl));
+  }
+}
+
+function checkSharedResult() {
+  const params     = new URLSearchParams(location.search);
+  const sharedType = params.get('type');
+  if (sharedType && TYPES[sharedType]) {
+    myResultKey  = sharedType;
+    step         = TOTAL_Q;
+    isSharedView = true;
+    renderResult();
+  } else {
+    render();
   }
 }
 
 initFirebase();
-render();
+checkSharedResult();
 </script>
 </body>
 </html>
