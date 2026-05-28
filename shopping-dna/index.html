@@ -43,14 +43,12 @@
       overflow: hidden;
     }
 
-    /* ── 진행 바 ────────────────────────── */
     .prog-wrap { flex-shrink: 0; height: 3px; background: var(--border); }
     .prog-fill  { height: 100%; background: var(--red); transition: width 0.4s cubic-bezier(.4,0,.2,1); }
 
-    /* ── 공통 뷰 ────────────────────────── */
     .view { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
-    /* ── 인트로 ─────────────────────────── */
+    /* 인트로 */
     .intro {
       justify-content: center; align-items: center; text-align: center;
       padding: 40px 32px;
@@ -80,8 +78,8 @@
     .btn-start:active { opacity: .85; }
     .intro-note { font-size: 14px; color: var(--light); }
 
-    /* ── 문항 화면 ──────────────────────── */
-    .qview { padding: 20px 24px 0; flex: 1; display: flex; flex-direction: column; }
+    /* 문항 화면 */
+    .qview { padding: 20px 24px; flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
     .step-bars { display: flex; gap: 3px; margin-bottom: 28px; flex-shrink: 0; }
     .step-bar {
       flex: 1; height: 3px; border-radius: 2px;
@@ -90,44 +88,39 @@
     .step-bar.done { background: var(--red); opacity: .45; }
     .step-bar.curr { background: var(--red); }
 
-    .q-scene { font-size: 15px; font-weight: 600; color: var(--mid); flex-shrink: 0; }
     .q-num {
       font-size: 13px; font-weight: 700; color: var(--red);
-      letter-spacing: .5px; margin-bottom: 14px; flex-shrink: 0;
-    }
-    .q-body {
-      flex: 1; display: flex; flex-direction: column;
-      justify-content: center; gap: 8px;
+      letter-spacing: .5px; margin-bottom: 16px; flex-shrink: 0;
     }
     .q-text {
-      font-size: 30px; font-weight: 700; line-height: 1.45;
+      font-size: 22px; font-weight: 700; line-height: 1.5;
       color: var(--dark); word-break: keep-all;
+      margin-bottom: 40px; flex-shrink: 0;
     }
-    .opts {
-      flex-shrink: 0; padding: 20px 0;
+
+    .opts-container {
+      flex: 1; display: flex; gap: 12px; margin-top: auto;
       padding-bottom: calc(20px + env(safe-area-inset-bottom));
-      display: flex; flex-direction: column; gap: 10px;
     }
     .opt {
-      width: 100%; padding: 18px 22px;
-      border: 1.5px solid var(--border); border-radius: 16px;
-      background: #fff; text-align: left; font-family: inherit;
-      font-size: 17px; font-weight: 500; color: var(--dark);
-      line-height: 1.5; cursor: pointer; word-break: keep-all;
-      transition: background .14s, border-color .14s, color .14s, transform .1s;
+      flex: 1; padding: 28px 20px;
+      border: 2px solid var(--border); border-radius: 16px;
+      background: #fff; text-align: center; font-family: inherit;
+      font-size: 32px; font-weight: 700; color: var(--red);
+      cursor: pointer; transition: all .2s;
+      display: flex; align-items: center; justify-content: center;
     }
-    .opt:active:not(:disabled) { transform: scale(.985); }
-    .opt.selected { background: var(--red); border-color: var(--red); color: #fff; }
-    .opt:disabled { cursor: default; }
+    .opt:active { transform: scale(.95); background: var(--red-bg); }
+    .opt:disabled { cursor: default; opacity: .5; }
 
-    /* ── 분석 중 ────────────────────────── */
+    /* 분석 중 */
     .analyzing { justify-content: center; align-items: center; text-align: center; gap: 14px; }
     .analyzing-icon { font-size: 56px; animation: spin 1.2s linear infinite; }
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .analyzing h2 { font-size: 22px; font-weight: 700; color: var(--dark); }
     .analyzing p  { font-size: 16px; color: var(--mid); }
 
-    /* ── 결과 / 상세 화면 ───────────────── */
+    /* 결과 화면 */
     .result-view {
       flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
       padding: 24px 24px 32px;
@@ -174,7 +167,6 @@
       background: var(--red); flex-shrink: 0; margin-top: 9px;
     }
 
-    /* ── 진단 보고서 박스 ────────────────── */
     .diag-box {
       background: var(--red-bg); border-radius: 16px;
       padding: 20px; display: flex; flex-direction: column; gap: 16px;
@@ -202,7 +194,6 @@
       word-break: keep-all;
     }
 
-    /* ── CTA ────────────────────────────── */
     .result-ctas { display: flex; flex-direction: column; gap: 10px; }
     .btn {
       width: 100%; padding: 18px; border: none; border-radius: 100px;
@@ -225,7 +216,7 @@
     }
     .btn-text:active { color: var(--mid); }
 
-    /* ── 모든 유형 보기 ─────────────────── */
+    /* 모든 유형 보기 */
     .all-types-view { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; display: flex; flex-direction: column; }
     .all-types-header {
       display: flex; align-items: center; gap: 12px;
@@ -258,7 +249,6 @@
     }
     .type-card-arrow { font-size: 20px; color: var(--light); flex-shrink: 0; }
 
-    /* ── 애니메이션 ──────────────────────── */
     @keyframes slideIn { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: translateX(0); } }
     .anim-slide { animation: slideIn .22s ease forwards; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -270,89 +260,32 @@
 <body>
 <div id="app"></div>
 <script>
-/* ── 문항 데이터 (8문항, 2지선다, 시나리오 연결형) ──────────── */
 const QS = [
-  {
-    scene: "🛍️ 쇼핑 시작",
-    text: "오늘 쇼핑 앱 열었어.\n솔직히 켠 이유는",
-    opts: [
-      "살 게 있어서. 목적 있음",
-      "그냥 심심해서. 이유 없음"
-    ]
-  },
-  {
-    scene: null,
-    text: "앱 열자마자 찜목록 봤더니,\n갖고 싶었던 게 품절이야.",
-    opts: [
-      "재입고 알림 ON. 기다릴 수 있어",
-      "아쉽지만 다른 거 뭐 있나 둘러봐"
-    ]
-  },
-  {
-    scene: null,
-    text: "아쉬운 마음에 다른 거 둘러보다가\n마음에 딱 드는 게 눈에 들어왔어.\n근데 가격이 좀 애매해.",
-    opts: [
-      "다른 데서 최저가 검색 시작",
-      "맘에 들면 사는 거지. 바로 담아"
-    ]
-  },
-  {
-    scene: null,
-    text: "다른 앱에도 비슷한 게 있어.",
-    opts: [
-      "둘 다 꺼내놓고 꼼꼼히 비교해서 결정",
-      "굳이? 이미 마음은 처음 봤던 거야"
-    ]
-  },
-  {
-    scene: null,
-    text: "결제 직전,\n리뷰가 단 하나도 없어.",
-    opts: [
-      "내가 첫 번째 개척자가 되면 되지",
-      "잠깐, 리뷰 있는 걸로 갈아탈게"
-    ]
-  },
-  {
-    scene: "✅ 결제 완료!",
-    text: "다 결제했어. 그런데 알고리즘이\n방금 산 것과 비슷한 걸 더 싸게\n보여줬어.",
-    opts: [
-      "취소하고 다시 산다. 더 싼 게 맞잖아",
-      "이미 샀으니까 무시한다. 내 선택이 맞아"
-    ]
-  },
-  {
-    scene: "📦 며칠 후...",
-    text: "택배 뜯어보니까",
-    opts: [
-      "맞아 이거! 리뷰 보고 기다렸던 그거!",
-      "어? 이게 뭐였지? 너무 많이 샀나..."
-    ]
-  },
-  {
-    scene: "💬 마무리",
-    text: "택배 뜯었어. 친구한테?",
-    opts: [
-      "카톡 바로 쐈어. \"나 이거 샀어 봐봐\"",
-      "왜 알려줘. 좋은 건 나만 알아야 해"
-    ]
-  }
+  { text: "딱히 살 것도 없는데… 손가락이 먼저 쇼핑 앱을 켠다" },
+  { text: "찜은 한가득인데, 실제로 산 건? …없다" },
+  { text: "심쿵한 거 발견! 근데 정가네… 일단 찜만. (할인은 언젠가 온다)" },
+  { text: "사기 직전, '혹시 더 싼 데 없나?' 손이 다른 데 검색하러 간다" },
+  { text: "별점 테러 리뷰 발견. 굳이 눌러서 끝까지 정독한다" },
+  { text: "배송비 3천원? 차라리 뭐 하나 더 담는 게 이득 같다" },
+  { text: "한참 비교했는데… 결국 맨 처음 본 그게 자꾸 아른거린다" },
+  { text: "살까 말까? 일단 알림 켜놓고 세일 때를 노린다" },
+  { text: "'추천 피드' 그만 봐야지… 하면서 또 스크롤 중" },
+  { text: "리뷰 정독 1시간. 그래도 결국 결제 버튼을 누른다" }
 ];
 
-/* ── 판별 로직 ─────────────────────────────────────────── */
-// [A선택, B선택] → 타입키 / 8문항×2 = 16슬롯 / 6타입 분배
 const SCORE_MAP = [
-  ['A', 'F'],  // Q1: 앱 켰어 (목적 / 심심)
-  ['A', 'F'],  // Q2: 품절 (알림 / 둘러봐)
-  ['C', 'B'],  // Q3: 가격 고민 (최저가 / 바로 담아)
-  ['C', 'A'],  // Q4: 비교 (꼼꼼히 / 처음 봤던 거)
-  ['B', 'E'],  // Q5: 리뷰 없음 (개척자 / 갈아타)
-  ['D', 'F'],  // Q6: 알고리즘 (취소 / 무시)
-  ['E', 'D'],  // Q7: 택배 (기다렸던 그거 / 이게뭐지)
-  ['E', 'C'],  // Q8: 공유 (카톡 / 왜알려줘)
+  ['F', 'A'],  // Q1
+  ['D', 'C'],  // Q2
+  ['A', 'F'],  // Q3
+  ['E', 'C'],  // Q4
+  ['C', 'E'],  // Q5
+  ['B', 'D'],  // Q6
+  ['E', 'B'],  // Q7
+  ['A', 'B'],  // Q8
+  ['F', 'E'],  // Q9
+  ['C', 'D']   // Q10
 ];
-// A:3 B:2 C:3 D:2 E:3 F:3 → 총 16
 
-/* ── 진단 지표 헬퍼 ────────────────────────────────────── */
 function diagRow(label, filled) {
   const level    = filled >= 6 ? '높음' : filled >= 4 ? '중간' : '낮음';
   const cls      = filled >= 6 ? 'high' : filled >= 4 ? 'mid'  : 'low';
@@ -365,145 +298,142 @@ function diagRow(label, filled) {
   </div>`;
 }
 
-/* ── 유형 데이터 ───────────────────────────────────────── */
 const TYPES = {
   A: {
-    emoji: "🎯",
-    name: "스나이퍼 쇼퍼",
-    tagline: "원하는 것만, 딱, 바로",
-    quote: "\"쇼핑에 시간 낭비 없어요.\n살 거 정했으면 그냥 사는 거죠.\"",
+    emoji: "🍷",
+    name: "장바구니 숙성 장인",
+    tagline: "와인처럼 담가두고 할인을 기다림",
+    quote: "\"할인이 구매의 허락증이에요.\n쿠폰 뜨면 0.3초 안에 결제합니다.\"",
     traits: [
-      "장바구니에 쓸데없는 게 없음",
-      "검색창에 원하는 상품명을 정확히 입력함",
-      "세일 없어도 필요하면 사고, 세일 있어도 필요 없으면 안 삼"
+      "할인이 없으면 원칙상 못 산다",
+      "쿠폰 알림은 최우선 알림",
+      "장바구니가 협상 테이블이다"
     ],
     diag: {
       metrics: [
-        { label: '계획성',   filled: 8 },
-        { label: '충동성',   filled: 2 },
-        { label: '정보 탐색', filled: 4 },
-        { label: '손실 회피', filled: 4 },
+        { label: '할인 민감도', filled: 8 },
+        { label: '기다림의 미학', filled: 8 },
+        { label: '충동성', filled: 4 },
+        { label: '계획성', filled: 6 },
       ],
-      text: "목표가 명확할 때 가장 빠르게 결정합니다.\n필요 없는 정보는 처음부터 차단하고,\n한번 결정하면 잘 바꾸지 않습니다.\n새로운 카테고리 진입 시에만 탐색량이 급증하는\n효율 극대화형 소비 패턴입니다."
+      text: "인내의 화신인 척하지만, 쿠폰 알림이 뜨면\n즉시 폭발합니다. 담아둔 장바구니는\n할인을 기다리는 와인처럼 숙성 중입니다."
     },
-    tags: "#스나이퍼쇼퍼 #목적지향 #나의쇼핑DNA"
+    tags: "#장바구니숙성 #쿠폰대기 #나의쇼핑DNA"
   },
   B: {
-    emoji: "🌈",
-    name: "무드등 쇼퍼",
-    tagline: "기분이 결정해요",
-    quote: "\"오늘 기분 좋으니까 샀어요.\n그게 이유예요.\"",
+    emoji: "🧮",
+    name: "3천원 아끼려다 만원 쓰는 회계사",
+    tagline: "절약 전문가인 척, 계산은 늘 손해",
+    quote: "\"배송비 3천원은 말도 안 되죠.\n차라리 뭐 하나 더 사는 게 낫지 않나요?\"",
     traits: [
-      "예쁘면 사고, 마음이 동하면 사",
-      "브랜드 감성이 맞으면 가격은 두 번째",
-      "'살까 말까'는 언제나 기분이 결정해줌"
+      "무료배송 기준금액을 모두 외운다",
+      "배송비를 '손해'로 본다",
+      "이달 추가로 산 물건 대부분이 배송비 채우기용"
     ],
     diag: {
       metrics: [
-        { label: '감성 반응성', filled: 8 },
-        { label: '계획성',    filled: 4 },
-        { label: '사회적 증거', filled: 2 },
-        { label: '충동성',    filled: 4 },
+        { label: '배송비 알레르기', filled: 8 },
+        { label: '무배 집착도', filled: 8 },
+        { label: '가격 민감도', filled: 7 },
+        { label: '자제력', filled: 2 },
       ],
-      text: "구매 트리거는 논리가 아닌 감각입니다.\n브랜드 분위기, 색감, 문구에 강하게 반응하며\n기분 상태가 구매 금액과 비례하는 경향이 있습니다.\n현재의 감정이 소비 행동을 주도하는\nPromotion Focus 유형입니다."
+      text: "배송비 아끼려고 실제로는 더 큰 금액을 씁니다.\n절약 계산기처럼 보이지만, 결과는 언제나\n손실입니다. 배송비가 보이는 순간 본능이 깨어납니다."
     },
-    tags: "#무드등쇼퍼 #기분이결정 #나의쇼핑DNA"
+    tags: "#무배함정 #배송비알레르기 #나의쇼핑DNA"
   },
   C: {
-    emoji: "💎",
-    name: "가성비 탐정",
-    tagline: "최저가 아닌 거 사면 찝찝해요",
-    quote: "\"어딘가 더 싼 데 있을 것 같아서요.\"",
+    emoji: "🔍",
+    name: "리뷰 셜록",
+    tagline: "추리는 화려한데 판결은 늘 '구매'",
+    quote: "\"리뷰를 다 읽은 뒤에 결정합니다.\n하지만 결론은 항상 같아요.\"",
     traits: [
-      "가격 비교는 기본, 성분·스펙 비교는 덤",
-      "숨겨진 할인 쿠폰 찾는 거 은근 재밌음",
-      "사기 전에 최소 3곳은 비교, 그게 기본 중의 기본"
+      "별점 낮은 리뷰를 굳이 클릭해 정독한다",
+      "나쁜 리뷰 발견해도 '개인차'로 기각한다",
+      "리뷰는 결정 도구가 아닌 확인 도구"
     ],
     diag: {
       metrics: [
-        { label: '정보 탐색', filled: 8 },
-        { label: '손실 회피', filled: 8 },
-        { label: '충동성',   filled: 2 },
-        { label: '사회적 증거', filled: 4 },
+        { label: '리뷰 의존도', filled: 8 },
+        { label: '확증편향', filled: 8 },
+        { label: '의심심', filled: 7 },
+        { label: '결정력', filled: 8 },
       ],
-      text: "최저가를 확인하지 못하면 구매 자체를 보류합니다.\n정보 과부하 상황에서도 비교를 멈추지 않으며,\n충분한 데이터가 쌓인 뒤에야 결정을 내리는\n분석 기반 소비 패턴입니다."
+      text: "탐정처럼 리뷰를 파고들지만, 판결은\n이미 정해져 있습니다. 리뷰는 이미 사기로\n결정한 마음에 도장을 찍는 절차일 뿐입니다."
     },
-    tags: "#가성비탐정 #최저가사냥꾼 #나의쇼핑DNA"
+    tags: "#리뷰셜록 #확증편향 #나의쇼핑DNA"
   },
   D: {
-    emoji: "⚡",
-    name: "번개 쇼퍼",
-    tagline: "보면 사고, 사면 잊어요",
-    quote: "\"그 순간의 설렘이 진짜예요.\n나중에 오면 이미 늦어요.\"",
+    emoji: "🖼️",
+    name: "찜목록 큐레이터",
+    tagline: "욕망을 전시만, 소장은 안 함",
+    quote: "\"찜해두면 마음이 놓여요.\n꼭 사야 한다는 압박이 없잖아요.\"",
     traits: [
-      "본 순간 결정됨, 고민 시간은 3초",
-      "택배 오면 '이게 뭐였지?' 싶을 때 있음",
-      "SNS 보다가 어느새 결제 완료돼 있음"
+      "찜은 200개, 구매전환율 3%",
+      "찜 자체가 완성, 구매는 부차적",
+      "찜목록을 정리하면서 '이거 언제 찜했지?'"
     ],
     diag: {
       metrics: [
-        { label: '자극 반응성', filled: 8 },
-        { label: '충동성',    filled: 8 },
-        { label: '계획성',    filled: 2 },
-        { label: '손실 회피', filled: 8 },
+        { label: '찜 수집욕', filled: 8 },
+        { label: '구매 미루기', filled: 8 },
+        { label: '신중성', filled: 6 },
+        { label: '구매력', filled: 2 },
       ],
-      text: "시각 자극 → 결제까지의 시간이 매우 짧습니다.\n구매 후 기억 지속성이 낮아 중복 구매가 발생하며,\nFOMO(놓칠까봐 두려움) 반응이 강해\n마감·한정 자극에 즉각적으로 반응합니다."
+      text: "미술관 큐레이터처럼 욕망을 전시합니다.\n찜하는 순간 이미 소유한 것 같은 만족감으로\n실제 구매는 미루기만 반복합니다."
     },
-    tags: "#번개쇼퍼 #즉흥결제 #나의쇼핑DNA"
+    tags: "#찜목록큐레이터 #찜이목표 #나의쇼핑DNA"
   },
   E: {
-    emoji: "👥",
-    name: "별점 감별사",
-    tagline: "후기 없으면 불안해요",
-    quote: "\"다들 좋다고 하는 데는\n이유가 있는 거잖아요.\"",
+    emoji: "💘",
+    name: "돌고 돌아 첫사랑",
+    tagline: "비교 2시간, 결국 처음 봤던 그 애",
+    quote: "\"꼼꼼하게 비교해 봤는데...\n어차피 처음 것이 최고네요.\"",
     traits: [
-      "리뷰 100개 이상인 상품에 안심감이 옴",
-      "주변 추천 상품은 꼭 기억해뒀다가 삼",
-      "좋은 거 발견하면 참지 못하고 바로 공유함"
+      "비교 탭을 여러 개 켠다",
+      "한참 비교했는데 처음 것으로 돌아온다",
+      "비교는 첫 선택을 정당화하는 과정"
     ],
     diag: {
       metrics: [
-        { label: '사회적 증거', filled: 8 },
-        { label: '리스크 회피', filled: 8 },
-        { label: '정보 탐색',  filled: 8 },
-        { label: '충동성',    filled: 4 },
+        { label: '비교 본능', filled: 8 },
+        { label: '첫인상 신뢰도', filled: 8 },
+        { label: '분석력', filled: 6 },
+        { label: '결정력', filled: 7 },
       ],
-      text: "타인의 경험을 자신의 판단 기준으로 활용합니다.\n리뷰 수가 많을수록 신뢰도가 상승하며,\n구매 후 주변에 공유해 집단 검증 사이클을\n스스로 만드는 소셜 중심 소비 패턴입니다."
+      text: "분석가처럼 보이지만, 심장은\n첫사랑을 잊지 못합니다. 비교는\n첫 선택을 정당화하는 아름다운 알리바이입니다."
     },
-    tags: "#별점감별사 #소셜쇼퍼 #나의쇼핑DNA"
+    tags: "#첫사랑회귀 #비교의허무 #나의쇼핑DNA"
   },
   F: {
-    emoji: "🔍",
-    name: "신상 사냥꾼",
-    tagline: "남들 모르는 거 먼저 찾아요",
-    quote: "\"이걸 어디서 봤냐고요?\n저만 알고 있었어요.\"",
+    emoji: "☁️",
+    name: "부처님 손바닥 위 손오공",
+    tagline: "알고리즘 벗어난 줄 알았지?",
+    quote: "\"추천 피드는 꽤 유용해요.\n아, 또 스크롤했다.\"",
     traits: [
-      "새 브랜드, 처음 보는 아이템이 더 설렘",
-      "쇼핑 자체가 취미, 발굴하는 과정이 즐거움",
-      "품절되면 비슷한 다른 거 찾는 게 또 재밌음"
+      "추천 피드를 끄고 싶지만 끄지 않는다",
+      "알고리즘이 나보다 내 취향을 더 잘 안다",
+      "본인이 알고리즘을 훈련시키는 중"
     ],
     diag: {
       metrics: [
-        { label: '탐색 욕구',   filled: 8 },
-        { label: '새로움 선호', filled: 8 },
-        { label: '브랜드 충성', filled: 2 },
-        { label: '계획성',     filled: 4 },
+        { label: '알고리즘 의존도', filled: 8 },
+        { label: '도파민 반응성', filled: 8 },
+        { label: '주체성', filled: 2 },
+        { label: '발견형 쇼핑', filled: 8 },
       ],
-      text: "발굴 자체가 목적인 탐험형 소비자입니다.\n품절·단종도 새로운 발견의 계기로 전환하며,\n트렌드 선도 성향이 강해 주변의\n얼리어답터 역할을 자연스럽게 수행합니다."
+      text: "부처님 손바닥 위의 손오공처럼, 벗어난 줄\n알지만 이미 손바닥 안입니다.\n클릭할 때마다 알고리즘을 훈련시키는 공범입니다."
     },
-    tags: "#신상사냥꾼 #탐험쇼퍼 #나의쇼핑DNA"
+    tags: "#알고리즘공범 #도파민쇼핑 #나의쇼핑DNA"
   }
 };
 
-/* ── 앱 상태 ──────────────────────────────────────────── */
-const TOTAL_Q   = 8;
-let step        = -1;
+const TOTAL_Q = 10;
+let step = -1;
 let quizStartTime = null;
-let answers     = [];
+let answers = [];
 let myResultKey = null;
-let hasSaved    = false;
+let hasSaved = false;
 
-/* ── Firebase ─────────────────────────────────────────── */
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyCtGNMXqjk45k0CkQI9Q4PDMkHt5tB_iyI",
   authDomain: "gpdna-cbf7b.firebaseapp.com",
@@ -546,7 +476,6 @@ async function saveToFirebase(typeKey) {
   } catch(e) { console.error('Save error:', e); }
 }
 
-/* ── 유틸 ─────────────────────────────────────────────── */
 function nl2br(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
 }
@@ -576,7 +505,6 @@ function buildTraits(key) {
   ).join('');
 }
 
-/* ── 렌더 ─────────────────────────────────────────────── */
 const $app = document.getElementById('app');
 
 async function render() {
@@ -588,11 +516,11 @@ async function render() {
 function renderIntro() {
   $app.innerHTML = `
     <div class="view intro">
-      <div class="intro-badge">🔬 소비 심리 진단</div>
-      <h1 class="intro-title">쇼핑할 때<br>나는 어떤<br><em>사람</em>일까?</h1>
-      <p class="intro-desc">8가지 실제 상황 기반<br>소비 행동 패턴 분석</p>
-      <button class="btn-start" onclick="goStart()">지금 바로 →</button>
-      <p class="intro-note">8개 질문 · 1분이면 완료</p>
+      <div class="intro-badge">🛍️ 쇼핑 심리 진단</div>
+      <h1 class="intro-title">나는<br>어떤 쇼퍼<br><em>유형</em>일까?</h1>
+      <p class="intro-desc">쇼핑할 때 나타나는 숨은 심리<br>10가지 실제 행동으로 진단</p>
+      <button class="btn-start" onclick="goStart()">지금 시작 →</button>
+      <p class="intro-note">10개 질문 · 1분이면 완료</p>
     </div>
   `;
 }
@@ -604,20 +532,17 @@ function renderQ() {
     const cls = i < step ? 'done' : i === step ? 'curr' : '';
     return `<div class="step-bar ${cls}"></div>`;
   }).join('');
-  const opts = q.opts.map((o, i) =>
-    `<button class="opt" onclick="pick(${i})">${nl2br(o)}</button>`
-  ).join('');
 
   $app.innerHTML = `
     <div class="prog-wrap"><div class="prog-fill" style="width:${pct}%"></div></div>
     <div class="view qview anim-slide">
       <div class="step-bars">${bars}</div>
       <div class="q-num">Q${step + 1} / ${TOTAL_Q}</div>
-      <div class="q-body">
-        ${q.scene ? `<div class="q-scene">${q.scene}</div>` : ''}
-        <div class="q-text">${nl2br(q.text)}</div>
+      <div class="q-text">${nl2br(q.text)}</div>
+      <div class="opts-container">
+        <button class="opt" onclick="pick(0)">O</button>
+        <button class="opt" onclick="pick(1)">X</button>
       </div>
-      <div class="opts">${opts}</div>
     </div>
   `;
 }
@@ -627,8 +552,8 @@ function renderAnalyzing() {
     <div class="prog-wrap"><div class="prog-fill" style="width:100%"></div></div>
     <div class="view analyzing">
       <div class="analyzing-icon">🔬</div>
-      <h2>소비 행동 분석 중...</h2>
-      <p>8개 패턴을 살펴보고 있어요</p>
+      <h2>당신의 쇼핑 유형을 분석 중...</h2>
+      <p>10가지 행동 패턴을 살펴보고 있어요</p>
     </div>
   `;
 }
@@ -642,8 +567,8 @@ async function renderResult() {
     <div class="prog-wrap"><div class="prog-fill" style="width:100%"></div></div>
     <div class="view result-view anim-fade">
       <div class="result-header">
-        <div class="result-emoji"><img src="img/type-${key}.png" alt="${t.name}"></div>
-        <div class="result-pill">소비 심리 진단 결과</div>
+        <div class="result-emoji">${t.emoji}</div>
+        <div class="result-pill">당신의 쇼핑 유형</div>
         <h2 class="result-name">${nl2br(t.name)}</h2>
         <p class="result-tagline">${nl2br(t.tagline)}</p>
       </div>
@@ -678,7 +603,7 @@ function renderAllTypes() {
     const isMine = key === myResultKey;
     return `
       <div class="type-card ${isMine ? 'mine' : ''}" onclick="renderTypeDetail('${key}')">
-        <div class="type-card-img"><img src="img/type-${key}.png" alt="${t.name}"></div>
+        <div class="type-card-img">${t.emoji}</div>
         <div class="type-card-info">
           <div class="type-card-name">${t.name}</div>
           <div class="type-card-tagline">${t.tagline}</div>
@@ -715,8 +640,8 @@ function renderTypeDetail(key) {
       </div>
 
       <div class="result-header">
-        <div class="result-emoji"><img src="img/type-${key}.png" alt="${t.name}"></div>
-        <div class="result-pill">소비 심리 유형</div>
+        <div class="result-emoji">${t.emoji}</div>
+        <div class="result-pill">쇼핑 유형</div>
         <h2 class="result-name">${nl2br(t.name)}</h2>
         <p class="result-tagline">${nl2br(t.tagline)}</p>
       </div>
@@ -732,10 +657,14 @@ function renderTypeDetail(key) {
   `;
 }
 
-/* ── 액션 ─────────────────────────────────────────────── */
 function goStart() {
   step = 0; answers = []; myResultKey = null; hasSaved = false;
   quizStartTime = Date.now();
+  render();
+}
+
+function goRestart() {
+  step = -1; answers = []; myResultKey = null; hasSaved = false; quizStartTime = null;
   render();
 }
 
@@ -743,7 +672,6 @@ function pick(idx) {
   const btns = $app.querySelectorAll('.opt');
   if (!btns[idx] || btns[idx].disabled) return;
   btns.forEach(b => b.disabled = true);
-  btns[idx].classList.add('selected');
   answers.push(idx);
 
   if (step === TOTAL_Q - 1) {
@@ -753,14 +681,9 @@ function pick(idx) {
   }
 }
 
-function goRestart() {
-  step = -1; answers = []; myResultKey = null; hasSaved = false; quizStartTime = null;
-  render();
-}
-
 function doShare(key) {
   const t    = TYPES[key];
-  const text = `나의 쇼핑 DNA는 "${t.name}"이에요!\n${t.tagline}\n\n${t.tags}`;
+  const text = `나의 쇼핑 유형은 "${t.name}"이에요!\n${t.tagline}\n\n${t.tags}`;
   if (navigator.share) {
     navigator.share({ title: '나의 쇼핑 DNA', text, url: location.href }).catch(() => {});
   } else {
@@ -768,7 +691,6 @@ function doShare(key) {
   }
 }
 
-/* ── 시작 ─────────────────────────────────────────────── */
 initFirebase();
 render();
 </script>
