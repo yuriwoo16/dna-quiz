@@ -103,11 +103,11 @@
     }
 
     .opts-container {
-      flex: 1; display: flex; gap: 12px; margin-top: auto;
+      display: flex; gap: 12px; margin-top: auto;
       padding-bottom: calc(20px + env(safe-area-inset-bottom));
     }
     .opt {
-      flex: 1; padding: 28px 20px;
+      flex: 1; height: 120px;
       border: 2px solid var(--border); border-radius: 16px;
       background: #fff; text-align: center; font-family: inherit;
       font-size: 32px; font-weight: 700; color: var(--red);
@@ -224,10 +224,8 @@
     .okcp-card { flex-shrink: 0; width: 116px; }
     .okcp-img {
       width: 116px; height: 116px; border-radius: 12px;
-      margin-bottom: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 800; color: rgba(255,255,255,0.92);
-      letter-spacing: 1px;
+      margin-bottom: 8px; object-fit: cover;
+      background: var(--surface); display: block;
     }
     .okcp-brand { font-size: 11px; color: var(--mid); margin-bottom: 3px; }
     .okcp-name {
@@ -468,12 +466,11 @@ const TYPES = {
 };
 
 const OKCP_PRODUCTS = [
-  { brand: '스타벅스',    name: '카페 아메리카노 T+탕종 파마산 치즈 베이글', discount: 30, price: '12,400원', color: '#1E3932', abbr: 'SB' },
-  { brand: '배스킨라빈스', name: '패밀리 아이스크림',                        discount: 2,  price: '25,540원', color: '#E6007E', abbr: 'BR' },
-  { brand: '스타벅스',    name: '아이스 카페 라떼 T',                        discount: 0,  price: '5,200원',  color: '#1E3932', abbr: 'SB' },
-  { brand: '스타벅스',    name: '딸기 딜라이트 요거트 블렌디드',              discount: 0,  price: '6,400원',  color: '#1E3932', abbr: 'SB' },
-  { brand: 'GS25',        name: '모바일 금액권 5,000원',                     discount: 5,  price: '4,500원',  color: '#0046A3', abbr: 'GS' },
-  { brand: '피자헛',      name: '(오리지널)페페로니 러버 L+콜라 1.25L',      discount: 30, price: '27,800원', color: '#D62300', abbr: 'PH' }
+  { brand: '스타벅스',    name: '카페 아메리카노 T+탕종 파마산 치즈 베이글', discount: 30, price: '12,400원', img: 'img/prod-1.png' },
+  { brand: '배스킨라빈스', name: '패밀리 아이스크림',                        discount: 2,  price: '25,540원', img: 'img/prod-2.png' },
+  { brand: '스타벅스',    name: '아이스 카페 라떼 T',                        discount: 0,  price: '5,200원',  img: 'img/prod-3.png' },
+  { brand: '스타벅스',    name: '딸기 딜라이트 요거트 블렌디드',              discount: 0,  price: '6,400원',  img: 'img/prod-4.png' },
+  { brand: 'GS25',        name: '모바일 금액권 5,000원',                     discount: 5,  price: '4,500원',  img: 'img/prod-5.png' }
 ];
 
 const TOTAL_Q = 10;
@@ -573,7 +570,7 @@ function buildOkcpSection(typeKey) {
     const disc = p.discount > 0 ? `<span class="okcp-discount">${p.discount}%</span> ` : '';
     return `
       <div class="okcp-card">
-        <div class="okcp-img" style="background:${p.color}">${p.abbr}</div>
+        <img class="okcp-img" src="${p.img}" alt="${p.brand}">
         <div class="okcp-brand">${p.brand}</div>
         <div class="okcp-name">${p.name}</div>
         <div class="okcp-price">${disc}${p.price}</div>
