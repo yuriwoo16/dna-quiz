@@ -651,8 +651,7 @@ async function renderResult() {
     ? `<div class="shared-banner">👆 친구가 공유한 결과예요</div>` : '';
 
   const ctaButtons = isSharedView ? `
-    <button class="btn btn-primary"   onclick="goStart()">나도 해보기 →</button>
-    <button class="btn btn-secondary" onclick="doShare('${key}')">결과 공유하기</button>
+    <button class="btn btn-primary" onclick="goRestart()">나도 해보기 →</button>
   ` : `
     <button class="btn btn-primary"   onclick="doShare('${key}')">결과 공유하기</button>
     <button class="btn btn-secondary" onclick="renderAllTypes()">모든 유형 보러가기</button>
