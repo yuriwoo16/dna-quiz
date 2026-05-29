@@ -156,9 +156,8 @@
       text-align: center; gap: 10px;
     }
     .result-emoji {
-      width: 132px; height: 132px; display: flex;
-      align-items: center; justify-content: center;
-      font-size: 64px; margin-bottom: 4px; overflow: hidden;
+      width: 132px; height: 132px; margin-bottom: 4px;
+      object-fit: contain; display: block;
     }
     .pct-badge {
       font-size: 13px; font-weight: 700; color: var(--red);
@@ -664,7 +663,7 @@ async function renderResult() {
     <div class="view result-view anim-fade">
       ${sharedBanner}
       <div class="result-header">
-        <div class="result-emoji">${t.emoji}</div>
+        <img class="result-emoji" src="img/icon-${key}.png" alt="${t.name}">
         <div class="pct-badge">🏆 상위 ${t.pct}%</div>
         <h2 class="result-name">${nl2br(t.name)}</h2>
         <p class="result-tagline">${nl2br(t.tagline)}</p>
@@ -733,7 +732,7 @@ function renderTypeDetail(key) {
       </div>
 
       <div class="result-header">
-        <div class="result-emoji">${t.emoji}</div>
+        <img class="result-emoji" src="img/icon-${key}.png" alt="${t.name}">
         <div class="pct-badge">🏆 상위 ${t.pct}%</div>
         <h2 class="result-name">${nl2br(t.name)}</h2>
         <p class="result-tagline">${nl2br(t.tagline)}</p>
