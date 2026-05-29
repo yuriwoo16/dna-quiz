@@ -57,7 +57,8 @@
     .intro {
       justify-content: center; align-items: center; text-align: center;
       padding: 40px 32px;
-      padding-bottom: calc(40px + env(safe-area-inset-bottom));
+      padding-bottom: calc(130px + env(safe-area-inset-bottom));
+      position: relative;
     }
     .intro-title {
       font-size: 38px; font-weight: 800; line-height: 1.25;
@@ -65,18 +66,24 @@
     }
     .intro-title em { color: var(--red); font-style: normal; }
     .intro-main-img {
-      width: 200px; height: 200px; object-fit: contain;
+      width: 240px; height: 240px; object-fit: contain;
       margin-bottom: 20px; flex-shrink: 0;
     }
     .intro-desc {
       font-size: 17px; color: var(--mid); line-height: 1.65;
-      margin-bottom: 32px; word-break: keep-all;
+      word-break: keep-all;
+    }
+    .intro-cta {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 16px 32px;
+      padding-bottom: calc(16px + env(safe-area-inset-bottom));
+      background: #fff;
     }
     .btn-start {
       display: block; width: 100%; padding: 19px;
       background: var(--red); color: #fff; border: none;
       border-radius: 100px; font-family: inherit; font-size: 18px;
-      font-weight: 700; cursor: pointer; margin-bottom: 16px; transition: opacity .15s;
+      font-weight: 700; cursor: pointer; margin-bottom: 12px; transition: opacity .15s;
     }
     .btn-start:active { opacity: .85; }
     .intro-note { font-size: 15px; color: var(--light); }
@@ -597,8 +604,10 @@ function renderIntro() {
       <h1 class="intro-title">혹시 나만<br>이렇게<br><em>쇼핑해?</em></h1>
       <img class="intro-main-img" src="img/main.png" alt="">
       <p class="intro-desc">당신의 쇼핑 본능을 파헤쳐 보세요.</p>
-      <button class="btn-start" onclick="goStart()">내 유형 1분 진단 →</button>
-      <p class="intro-note"><strong class="intro-count">2,234명</strong>이 참여했어요</p>
+      <div class="intro-cta">
+        <button class="btn-start" onclick="goStart()">내 유형 1분 진단 →</button>
+        <p class="intro-note"><strong class="intro-count">2,234명</strong>이 참여했어요</p>
+      </div>
     </div>
   `;
 }
