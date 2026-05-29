@@ -287,7 +287,7 @@
     .type-card.mine { border-color: var(--red); background: var(--red-bg); }
     .type-card-img {
       width: 60px; height: 60px; flex-shrink: 0;
-      font-size: 36px; display: flex; align-items: center; justify-content: center;
+      object-fit: contain; display: block;
     }
     .type-card-info { flex: 1; }
     .type-card-name { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
@@ -698,7 +698,7 @@ function renderAllTypes() {
     const isMine = key === myResultKey;
     return `
       <div class="type-card ${isMine ? 'mine' : ''}" onclick="renderTypeDetail('${key}')">
-        <div class="type-card-img">${t.emoji}</div>
+        <img class="type-card-img" src="img/icon-${key}.png" alt="${t.name}">
         <div class="type-card-info">
           <div class="type-card-name">${t.name}</div>
           <div class="type-card-tagline">${t.tagline}</div>
