@@ -585,7 +585,7 @@ function buildOkcpSection(typeKey) {
   }).join('');
   return `
     <div class="okcp-section">
-      <div class="okcp-title">${t.emoji} ${t.name} 유형이 좋아할만한 OK캐쉬백 상품</div>
+      <div class="okcp-title"><span style="color:var(--red)">${t.name}</span>이 좋아할만한 상품</div>
       <div class="okcp-scroll">${cards}</div>
     </div>`;
 }
